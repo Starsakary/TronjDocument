@@ -1,0 +1,259 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Contract &#8212; Tronj 0.1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="RPC API Client" href="RPC%20API%20Client.html" />
+    <link rel="prev" title="Sending Transaction" href="Sending%20Transaction.html" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="../_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+  </head><body>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="RPC%20API%20Client.html" title="RPC API Client"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Sending%20Transaction.html" title="Sending Transaction"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Tronj 0.1.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Smart Contract</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="smart-contract">
+<h1>Smart Contract<a class="headerlink" href="#smart-contract" title="Permalink to this headline">¶</a></h1>
+<p>Smart contract is a key feature of TRON network. It’s easy to creating and interacting with smart contracts through Tronj.</p>
+<div class="section" id="calling-smart-contract">
+<h2>Calling smart contract<a class="headerlink" href="#calling-smart-contract" title="Permalink to this headline">¶</a></h2>
+<p>There are two types of smart contract calls: <em>const call</em> and <em>trigger call</em>.</p>
+<p>Simply, a <em>const call</em> returns result immediately once and no need to sign or broadcast.</p>
+<p><em>Trigger call</em> is a type of system contract call, needs signing and broadcasting. It fetches the result through the API.</p>
+<div class="section" id="const-call">
+<h3>Const call<a class="headerlink" href="#const-call" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span>public void getSmartContract() {
+        TronClient client = TronClient.ofNile(&quot;Your private key&quot;);
+        try {
+          
+            Contract cntr = client.getContract(&quot;TF17BgPaZYbz8oxbjhriubPDsA7ArKoLX3&quot;); //JST
+            System.out.println(&quot;Contract name: &quot; + cntr.getName());
+            System.out.println(&quot;Contract functions: &quot; + cntr.getFunctions().size());
+            for (ContractFunction cf : cntr.getFunctions()) {
+                System.out.println(cf.toString());
+            }
+        } catch (Exception e) {
+            System.out.println(&quot;error: &quot; + e);
+        }
+    }
+
+//Result
+Contract name: JST
+Contract functions: 26
+# function name() view returns (string )
+# function stop() returns (null )
+# function approve(guy address, wad uint256 ) returns (bool )
+# function setOwner(owner_ address ) returns (null )
+# function totalSupply() view returns (uint256 )
+# function transferFrom(src address, dst address, wad uint256 ) returns (bool )
+# function decimals() view returns (uint256 )
+# function mint(guy address, wad uint256 ) returns (null )
+# function burn(wad uint256 ) returns (null )
+# function balanceOf(src address ) view returns (uint256 )
+# function stopped() view returns (bool )
+# function setAuthority(authority_ address ) returns (bool result)
+# function owner() view returns (address )
+# function symbol() view returns (string )
+# function burn(guy address, wad uint256 ) returns (null )
+# function mint(wad uint256 ) returns (null )
+# function transfer(dst address, wad uint256 ) returns (bool )
+# function push(dst address, wad uint256 ) returns (null )
+# function setSymbol(symbol_ string ) returns (null )
+# function move(src address, dst address, wad uint256 ) returns (null )
+# function start() returns (null )
+# function authority() view returns (address )
+# function setName(name_ string ) returns (null )
+# function approve(guy address ) returns (bool )
+# function allowance(src address, guy address ) view returns (uint256 )
+# function pull(src address, wad uint256 ) returns (null )
+</pre></div>
+</div>
+</div>
+<div class="section" id="trigger-call">
+<h3>Trigger call<a class="headerlink" href="#trigger-call" title="Permalink to this headline">¶</a></h3>
+<p>The first half of the <em>trigger call</em> process is similar to the <em>const call</em>.</p>
+<p>You can easily set <code class="docutils literal notranslate"><span class="pre">feeLimit</span></code>, <code class="docutils literal notranslate"><span class="pre">memo</span></code> and other common attributes via the <code class="docutils literal notranslate"><span class="pre">TransactionBuilder</span></code>.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">triggerCallDemo</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">TronClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">TronClient</span><span class="p">.</span><span class="na">ofNile</span><span class="p">(</span><span class="s">&quot;3333333333333333333333333333333333333333333333333333333333333333&quot;</span><span class="p">);</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="c1">//function &#39;transfer&#39;</span>
+            <span class="c1">//params: function name, function params</span>
+            <span class="n">Function</span> <span class="n">trc20Transfer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Function</span><span class="p">(</span><span class="s">&quot;transfer&quot;</span><span class="p">,</span>
+            <span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="k">new</span> <span class="n">Address</span><span class="p">(</span><span class="s">&quot;TVjsyZ7fYF3qLF6BQgPmTEZy1xrNNyVAAA&quot;</span><span class="p">),</span>
+                <span class="k">new</span> <span class="n">Uint256</span><span class="p">(</span><span class="n">BigInteger</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="mi">10L</span><span class="p">).</span><span class="na">multiply</span><span class="p">(</span><span class="n">BigInteger</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="na">pow</span><span class="p">(</span><span class="mi">18</span><span class="p">)))),</span>
+            <span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="k">new</span> <span class="n">TypeReference</span><span class="o">&lt;</span><span class="n">Bool</span><span class="o">&gt;</span><span class="p">()</span> <span class="p">{}));</span>
+
+            <span class="c1">//the params are: owner address, contract address, function</span>
+            <span class="n">TransactionBuilder</span> <span class="n">builder</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="na">triggerCall</span><span class="p">(</span><span class="s">&quot;TJRabPrwbZy45sbavfcjinPJC18kjpRTv8&quot;</span><span class="p">,</span> <span class="s">&quot;TF17BgPaZYbz8oxbjhriubPDsA7ArKoLX3&quot;</span><span class="p">,</span> <span class="n">trc20Transfer</span><span class="p">);</span> <span class="c1">//JST</span>
+            <span class="c1">//set extra params</span>
+            <span class="n">builder</span><span class="p">.</span><span class="na">setFeeLimit</span><span class="p">(</span><span class="mi">100000000L</span><span class="p">);</span>
+            <span class="n">builder</span><span class="p">.</span><span class="na">setMemo</span><span class="p">(</span><span class="s">&quot;Let&#39;s go!&quot;</span><span class="p">);</span>
+            <span class="c1">//sign transaction</span>
+            <span class="n">Transaction</span> <span class="n">signedTxn</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="na">signTransaction</span><span class="p">(</span><span class="n">builder</span><span class="p">.</span><span class="na">build</span><span class="p">());</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">signedTxn</span><span class="p">.</span><span class="na">toString</span><span class="p">());</span>
+            <span class="c1">//broadcast transaction</span>
+            <span class="n">TransactionReturn</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="na">broadcastTransaction</span><span class="p">(</span><span class="n">signedTxn</span><span class="p">);</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;======== Result ========\n&quot;</span> <span class="o">+</span> <span class="n">ret</span><span class="p">.</span><span class="na">toString</span><span class="p">());</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;error: &quot;</span> <span class="o">+</span> <span class="n">e</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="smart-contract-apis">
+<h2>Smart contract APIs<a class="headerlink" href="#smart-contract-apis" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="getcontract">
+<h3>getContract<a class="headerlink" href="#getcontract" title="Permalink to this headline">¶</a></h3>
+<p>Get a <a class="reference internal" href="Contract.html"><span class="doc">Contract</span></a> object from the address.</p>
+<p><strong>PARAMS</strong></p>
+<p><em>1. contractAddress(String)</em></p>
+<p>The address of a smart contract.</p>
+<p><strong>RETURN</strong></p>
+<p>A Contract object.</p>
+<p><strong>THROW</strong></p>
+<p>Throws if the given contract address does not match any.</p>
+</div>
+<div class="section" id="constantcall">
+<h3>constantCall<a class="headerlink" href="#constantcall" title="Permalink to this headline">¶</a></h3>
+<p>make a constant call, without broadcasting.</p>
+<p><strong>PARAMS</strong></p>
+<p><em>1. ownerAddr(String)</em>*</p>
+<p>The caller’s address.</p>
+<p><em>2. contractAddr(String)</em>*</p>
+<p>The contract’s address.</p>
+<p><em>3. function(Function)</em>*</p>
+<p>The exact function you are calling, you can find the example in the <code class="docutils literal notranslate"><span class="pre">triggerCallDemo</span></code>.</p>
+<p><strong>RETURN</strong></p>
+<p>A TransactionExtention object</p>
+<p><strong>THROW</strong></p>
+<p>Throws if the function does not match any in the smart contract.</p>
+</div>
+<div class="section" id="triggercall">
+<h3>triggerCall<a class="headerlink" href="#triggercall" title="Permalink to this headline">¶</a></h3>
+<p>Make a trigger call. Trigger calls require signature and broadcasting. Refer to [RPC APIs](RPC APIs.md) for the signing and broadcasting functions.</p>
+<p><strong>PARAMS</strong></p>
+<p><em>1. ownerAddr(String)</em>*</p>
+<p>The caller’s address.</p>
+<p><em>2. contractAddr(String)</em>*</p>
+<p>The contract’s address.</p>
+<p><em>3. function(Function)</em>*</p>
+<p>The exact function you are calling, you can find the example in the <code class="docutils literal notranslate"><span class="pre">triggerCallDemo</span></code>.</p>
+<p><strong>RETURN</strong></p>
+<p>A TransactionBuilder object, for easily setting memos, feelimit, Etc.</p>
+<p><strong>THROW</strong></p>
+<p>Throws if the function does not match any in the smart contract.</p>
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Smart Contract</a><ul>
+<li><a class="reference internal" href="#calling-smart-contract">Calling smart contract</a><ul>
+<li><a class="reference internal" href="#const-call">Const call</a></li>
+<li><a class="reference internal" href="#trigger-call">Trigger call</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#smart-contract-apis">Smart contract APIs</a><ul>
+<li><a class="reference internal" href="#getcontract">getContract</a></li>
+<li><a class="reference internal" href="#constantcall">constantCall</a></li>
+<li><a class="reference internal" href="#triggercall">triggerCall</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Sending%20Transaction.html"
+                        title="previous chapter">Sending Transaction</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="RPC%20API%20Client.html"
+                        title="next chapter">RPC API Client</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/mddocs/Smart Contract.md.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="RPC%20API%20Client.html" title="RPC API Client"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Sending%20Transaction.html" title="Sending Transaction"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Tronj 0.1.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Smart Contract</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Sakary.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.3.1.
+    </div>
+  </body>
+</html>

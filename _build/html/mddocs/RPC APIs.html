@@ -1,0 +1,438 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RPC APIs &#8212; Tronj 0.1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Contract" href="Contract.html" />
+    <link rel="prev" title="RPC API Client" href="RPC%20API%20Client.html" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="../_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+  </head><body>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="Contract.html" title="Contract"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="RPC%20API%20Client.html" title="RPC API Client"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Tronj 0.1.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">RPC APIs</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="rpc-apis">
+<h1>RPC APIs<a class="headerlink" href="#rpc-apis" title="Permalink to this headline">¶</a></h1>
+<p>This chapter describes the specific definitions, parameters, return values and exception handling of the RPC APIs.</p>
+<div class="section" id="full-node-apis">
+<h2>Full Node APIs<a class="headerlink" href="#full-node-apis" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="signtransaction">
+<h3>signTransaction<a class="headerlink" href="#signtransaction" title="Permalink to this headline">¶</a></h3>
+<p>Sign a transactionExtention with the client binding private key.</p>
+<p><strong>PARAMS</strong></p>
+<p><em>1. txnExt(TransactionExtention)</em></p>
+<p>A TransactionExtention object.</p>
+<p><strong>RETURN</strong></p>
+<p>A signed transaction.</p>
+</div>
+<div class="section" id="id1">
+<h3>signTransaction<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Sign a transaction with the client binding private key.</p>
+<p><strong>PARAMS</strong></p>
+<p><em>1. txn(Transaction)</em></p>
+<p>A Transaction object.</p>
+<p><strong>RETURN</strong></p>
+<p>A signed transaction.</p>
+</div>
+<div class="section" id="id2">
+<h3>signTransaction<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>Sign a transaction with a private key.</p>
+<p><strong>PARAMS</strong></p>
+<p><em>1. txn(Transaction)</em></p>
+<p>A Transaction object.</p>
+<p><em>2. kp(SECP256K1.KeyPair)</em></p>
+<p>The private key to sign the transaction.</p>
+<p><strong>RETURN</strong></p>
+<p>A signed transaction.</p>
+</div>
+<div class="section" id="id3">
+<h3>signTransaction<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>Sign a transactionExtention with a private key.</p>
+<p><strong>PARAMS</strong></p>
+<p><em>1. txnExt(TransactionExtention)</em></p>
+<p>A TransactionExtention object.</p>
+<p><em>2. kp(SECP256K1.KeyPair)</em></p>
+<p>The private key to sign the transaction.</p>
+<p><strong>RETURN</strong></p>
+<p>A signed transaction.</p>
+</div>
+<div class="section" id="generateaddress">
+<h3>generateAddress<a class="headerlink" href="#generateaddress" title="Permalink to this headline">¶</a></h3>
+<p>Generate random address.</p>
+<p><strong>RETURN</strong></p>
+<p>Address in hex.</p>
+</div>
+<div class="section" id="transfer">
+<h3>Transfer<a class="headerlink" href="#transfer" title="Permalink to this headline">¶</a></h3>
+<p>Transfer TRX. amount in SUN.</p>
+<p><strong>PARAMS</strong></p>
+<p><em>1. fromAddress(String)</em>*</p>
+<p>fromAddress is the owner address.</p>
+<p><em>2. toAddress(String)</em>*</p>
+<p>toAddress is the recipient address.</p>
+<p><em>3. amount(int)</em>*</p>
+<p>amount is the amount of TRX to transfer in SUN.</p>
+<p><strong>RETURN</strong></p>
+<p>Transaction, including execution results.</p>
+<p><strong>THROWS</strong></p>
+<p>IllegalException, if fail to transfer.</p>
+</div>
+<div class="section" id="transfertrc10">
+<h3>TransferTrc10<a class="headerlink" href="#transfertrc10" title="Permalink to this headline">¶</a></h3>
+<p>Transfers TRC10 Asset</p>
+<p><strong>PARAMS</strong></p>
+<p><em>1. fromAddress(String)</em>*</p>
+<p>fromAddress is the owner address.</p>
+<p><em>2. toAddress(String)</em>*</p>
+<p>toAddress is the recipient address.</p>
+<p><em>3. tokenId(int)</em>*</p>
+<p>asset name</p>
+<p><em>4. amount(int)</em>*</p>
+<p>amount is the amount of TRX to transfer in SUN.</p>
+<p><strong>RETURN</strong></p>
+<p>Transaction, including execution results.</p>
+<p><strong>THROWS</strong></p>
+<p>IllegalException, if fail to transfer trc10.</p>
+</div>
+<div class="section" id="freezebalance">
+<h3>freezeBalance<a class="headerlink" href="#freezebalance" title="Permalink to this headline">¶</a></h3>
+<p>Freeze balance to get energy or bandwidth, for 3 days.</p>
+<p><strong>PARAMS</strong></p>
+<p><em>1. ownerAddress(String)</em>*</p>
+<p>owner address, default hexString.</p>
+<p><em>2. frozenBalance(long)</em>*</p>
+<p>TRX freeze amount, the unit is sun.</p>
+<p><em>3. frozenDuration(long)</em>*</p>
+<p>TRX freeze duration, only be specified as 3 days.</p>
+<p><em>4. resourceCode(int)</em>*</p>
+<p>resource type, can be “ENERGY” or “BANDWIDTH”</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="n">TransactionReturn</span> <span class="nf">freezeBalance</span><span class="p">(</span><span class="n">String</span> <span class="n">ownerAddress</span><span class="p">,</span> <span class="kt">long</span> <span class="n">frozenBalance</span><span class="p">,</span> <span class="kt">long</span> <span class="n">frozenDuration</span><span class="p">,</span> <span class="kt">int</span> <span class="n">resourceCode</span><span class="p">)</span> <span class="kd">throws</span> <span class="n">IllegalException</span><span class="p">{</span>
+
+        <span class="n">ByteString</span> <span class="n">rawFrom</span> <span class="o">=</span> <span class="n">parseAddress</span><span class="p">(</span><span class="n">ownerAddress</span><span class="p">);</span>
+        <span class="n">FreezeBalanceContract</span> <span class="n">freezeBalanceContract</span><span class="o">=</span>
+                <span class="n">FreezeBalanceContract</span><span class="p">.</span><span class="na">newBuilder</span><span class="p">()</span>
+                        <span class="p">.</span><span class="na">setOwnerAddress</span><span class="p">(</span><span class="n">rawFrom</span><span class="p">)</span>
+                        <span class="p">.</span><span class="na">setFrozenBalance</span><span class="p">(</span><span class="n">frozenBalance</span><span class="p">)</span>
+                        <span class="p">.</span><span class="na">setFrozenDuration</span><span class="p">(</span><span class="n">frozenDuration</span><span class="p">)</span>
+                        <span class="p">.</span><span class="na">setResourceValue</span><span class="p">(</span><span class="n">resourceCode</span><span class="p">)</span>
+                        <span class="p">.</span><span class="na">build</span><span class="p">();</span>
+        <span class="n">TransactionExtention</span> <span class="n">txnExt</span> <span class="o">=</span> <span class="n">blockingStub</span><span class="p">.</span><span class="na">freezeBalance2</span><span class="p">(</span><span class="n">freezeBalanceContract</span><span class="p">);</span>
+
+        <span class="k">if</span><span class="p">(</span><span class="n">SUCCESS</span> <span class="o">!=</span> <span class="n">txnExt</span><span class="p">.</span><span class="na">getResult</span><span class="p">().</span><span class="na">getCode</span><span class="p">()){</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalException</span><span class="p">(</span><span class="n">txnExt</span><span class="p">.</span><span class="na">getResult</span><span class="p">().</span><span class="na">getMessage</span><span class="p">().</span><span class="na">toStringUtf8</span><span class="p">());</span>
+        <span class="p">}</span>
+
+        <span class="n">Transaction</span> <span class="n">signedTxn</span> <span class="o">=</span> <span class="n">signTransaction</span><span class="p">(</span><span class="n">txnExt</span><span class="p">);</span>
+
+        <span class="n">TransactionReturn</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">blockingStub</span><span class="p">.</span><span class="na">broadcastTransaction</span><span class="p">(</span><span class="n">signedTxn</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>RETURN</strong></p>
+<p>Transaction, including execution results.</p>
+<p><strong>THROWS</strong></p>
+<p>IllegalException, if fail to freeze balance.</p>
+</div>
+<div class="section" id="unfreezebalance">
+<h3>unfreezeBalance<a class="headerlink" href="#unfreezebalance" title="Permalink to this headline">¶</a></h3>
+<p>Unfreeze balance to get TRX back.</p>
+<p><strong>PARAMS</strong></p>
+<p><em>1. ownerAddress(String)</em>*</p>
+<p>owner address, default hexString.</p>
+<p><em>2. resourceCode(int)</em>*</p>
+<p>resource type, can be “ENERGY” or “BANDWIDTH”</p>
+<p><strong>RETURN</strong></p>
+<p>Transaction, including execution results.</p>
+<p><strong>THROWS</strong></p>
+<p>IllegalException, if fail to unfreeze balance.</p>
+</div>
+<div class="section" id="votewitness">
+<h3>voteWitness<a class="headerlink" href="#votewitness" title="Permalink to this headline">¶</a></h3>
+<p>Vote for witnesses</p>
+<p><strong>PARAMS</strong></p>
+<p><em>1. ownerAddress(String)</em>*</p>
+<p>owner address, default hexString.</p>
+<p><em>2. votes(Map)</em>*</p>
+<p>key: ‘vote_address’ stands for the address of the witness you want to vote, default hexString.</p>
+<p>value: ‘vote_count’ stands for the number of votes you want to vote.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="n">TransactionReturn</span> <span class="nf">voteWitness</span><span class="p">(</span><span class="n">String</span> <span class="n">ownerAddress</span><span class="p">,</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">votes</span><span class="p">)</span> <span class="kd">throws</span> <span class="n">IllegalException</span><span class="p">{</span>
+        <span class="n">ByteString</span> <span class="n">rawFrom</span> <span class="o">=</span> <span class="n">parseAddress</span><span class="p">(</span><span class="n">ownerAddress</span><span class="p">);</span>
+        <span class="n">VoteWitnessContract</span> <span class="n">voteWitnessContract</span> <span class="o">=</span> <span class="n">createVoteWitnessContract</span><span class="p">(</span><span class="n">rawFrom</span><span class="p">,</span> <span class="n">votes</span><span class="p">);</span>
+        <span class="n">TransactionExtention</span> <span class="n">txnExt</span> <span class="o">=</span> <span class="n">blockingStub</span><span class="p">.</span><span class="na">voteWitnessAccount2</span><span class="p">(</span><span class="n">voteWitnessContract</span><span class="p">);</span>
+
+        <span class="k">if</span><span class="p">(</span><span class="n">SUCCESS</span> <span class="o">!=</span> <span class="n">txnExt</span><span class="p">.</span><span class="na">getResult</span><span class="p">().</span><span class="na">getCode</span><span class="p">()){</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalException</span><span class="p">(</span><span class="n">txnExt</span><span class="p">.</span><span class="na">getResult</span><span class="p">().</span><span class="na">getMessage</span><span class="p">().</span><span class="na">toStringUtf8</span><span class="p">());</span>
+        <span class="p">}</span>
+
+        <span class="n">Transaction</span> <span class="n">signedTxn</span> <span class="o">=</span> <span class="n">signTransaction</span><span class="p">(</span><span class="n">txnExt</span><span class="p">);</span>
+
+        <span class="n">TransactionReturn</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">blockingStub</span><span class="p">.</span><span class="na">broadcastTransaction</span><span class="p">(</span><span class="n">signedTxn</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>RETURN</strong></p>
+<p>Transaction, including execution results.</p>
+<p><strong>THROWS</strong></p>
+<p>IllegalException, if fail to vote witness.</p>
+</div>
+<div class="section" id="getnowblock">
+<h3>getNowBlock<a class="headerlink" href="#getnowblock" title="Permalink to this headline">¶</a></h3>
+<p>Query the latest block information.</p>
+<p><strong>RETURN</strong></p>
+<p>Block object.</p>
+<p><strong>THROWS</strong></p>
+<p>IllegalException, if fail to get now block.</p>
+</div>
+<div class="section" id="getblockbynum">
+<h3>getBlockByNum<a class="headerlink" href="#getblockbynum" title="Permalink to this headline">¶</a></h3>
+<p>Returns the Block Object corresponding to the ‘Block Height’ specified (number of blocks preceding it).</p>
+<p><strong>PARAMS</strong></p>
+<p><em>1. blockNum(long)</em>*</p>
+<p>blockNum is the block height.</p>
+<p><strong>RETURN</strong></p>
+<p>Block object.</p>
+<p><strong>THROWS</strong></p>
+<p>IllegalException, if the parameters are not correct.</p>
+</div>
+<div class="section" id="getblockbylatestnum">
+<h3>getBlockByLatestNum<a class="headerlink" href="#getblockbylatestnum" title="Permalink to this headline">¶</a></h3>
+<p>Get some latest blocks.</p>
+<p><strong>PARAMS</strong></p>
+<p><em>1. num(long)</em>*</p>
+<p>Number of latest blocks.</p>
+<p><strong>RETURN</strong></p>
+<p>BlockListExtention object.</p>
+<p><strong>THROWS</strong></p>
+<p>IllegalException, if the parameters are not correct.</p>
+</div>
+<div class="section" id="getnodeinfo">
+<h3>getNodeInfo<a class="headerlink" href="#getnodeinfo" title="Permalink to this headline">¶</a></h3>
+<p>Get current API node’ info.</p>
+<p><strong>RETURN</strong></p>
+<p>NodeInfo object.</p>
+<p><strong>THROWS</strong></p>
+<p>IllegalException, if fail to get nodeInfo.</p>
+</div>
+<div class="section" id="listnodes">
+<h3>listNodes<a class="headerlink" href="#listnodes" title="Permalink to this headline">¶</a></h3>
+<p>List all nodes that current API node is connected to.</p>
+<p><strong>RETURN</strong></p>
+<p>NodeList object.</p>
+<p><strong>THROWS</strong></p>
+<p>IllegalException, if fail to get node list.</p>
+</div>
+<div class="section" id="gettransactioninfobyblocknum">
+<h3>getTransactionInfoByBlockNum<a class="headerlink" href="#gettransactioninfobyblocknum" title="Permalink to this headline">¶</a></h3>
+<p>Get transactionInfo from block number.</p>
+<p><strong>PARAMS</strong></p>
+<p><em>1. blockNum(long)</em>*</p>
+<p>blockNum is the block height.</p>
+<p><strong>RETURN</strong></p>
+<p>TransactionInfoList object.</p>
+<p><strong>THROWS</strong></p>
+<p>IllegalException, if the parameters are not correct.</p>
+</div>
+<div class="section" id="gettransactioninfobyid">
+<h3>getTransactionInfoById<a class="headerlink" href="#gettransactioninfobyid" title="Permalink to this headline">¶</a></h3>
+<p>Query the transaction fee, block height by transaction id.</p>
+<p><strong>PARAMS</strong></p>
+<p><em>1. txID(String)</em>*</p>
+<p>Transaction hash, i.e. transaction id.</p>
+<p><strong>RETURN</strong></p>
+<p>TransactionInfo object.</p>
+<p><strong>THROWS</strong></p>
+<p>IllegalException, if the parameters are not correct.</p>
+</div>
+<div class="section" id="getaccount">
+<h3>getAccount<a class="headerlink" href="#getaccount" title="Permalink to this headline">¶</a></h3>
+<p>Get account info by address.</p>
+<p><strong>PARAMS</strong></p>
+<p><em>1. address(String)</em>*</p>
+<p>address, default hexString.</p>
+<p><strong>RETURN</strong></p>
+<p>Account object.</p>
+<p><strong>THROWS</strong></p>
+<p>IllegalException, if the parameters are not correct.</p>
+</div>
+<div class="section" id="listwitnesses">
+<h3>listWitnesses<a class="headerlink" href="#listwitnesses" title="Permalink to this headline">¶</a></h3>
+<p>List all witnesses that current API node is connected to.</p>
+<p><strong>RETURN</strong></p>
+<p>WitnessList object.</p>
+</div>
+</div>
+<div class="section" id="solidity-node-apis">
+<h2>Solidity Node APIs<a class="headerlink" href="#solidity-node-apis" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="getaccountsolidity">
+<h3>getAccountSolidity<a class="headerlink" href="#getaccountsolidity" title="Permalink to this headline">¶</a></h3>
+<p>Get solid account info by address.</p>
+<p><strong>PARAMS</strong></p>
+<p><em>1. address(String)</em>*</p>
+<p>address, default hexString.</p>
+<p><strong>RETURN</strong></p>
+<p>Account object.</p>
+<p><strong>THROWS</strong></p>
+<p>IllegalException, if the parameters are not correct.</p>
+</div>
+<div class="section" id="getnowblocksolidity">
+<h3>getNowBlockSolidity<a class="headerlink" href="#getnowblocksolidity" title="Permalink to this headline">¶</a></h3>
+<p>Query the latest solid block information.</p>
+<p><strong>RETURN</strong></p>
+<p>BlockExtention object.</p>
+<p><strong>THROWS</strong></p>
+<p>IllegalException, if fail to get now block.</p>
+</div>
+<div class="section" id="gettransactionbyidsolidity">
+<h3>getTransactionByIdSolidity<a class="headerlink" href="#gettransactionbyidsolidity" title="Permalink to this headline">¶</a></h3>
+<p>Get transaction receipt info from a transaction id, must be in solid block.</p>
+<p><strong>PARAMS</strong></p>
+<p><em>1. txID(String)</em>*</p>
+<p>Transaction hash, i.e. transaction id.</p>
+<p><strong>RETURN</strong></p>
+<p>Transaction object.</p>
+<p><strong>THROWS</strong></p>
+<p>IllegalException, if the parameters are not correct.</p>
+</div>
+<div class="section" id="getrewardsolidity">
+<h3>getRewardSolidity<a class="headerlink" href="#getrewardsolidity" title="Permalink to this headline">¶</a></h3>
+<p>Get the rewards that the voter has not received.</p>
+<p><strong>PARAMS</strong></p>
+<p><em>1. address(String)</em>*</p>
+<p>address, default hexString.</p>
+<p><strong>RETURN</strong></p>
+<p>NumberMessage object.</p>
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">RPC APIs</a><ul>
+<li><a class="reference internal" href="#full-node-apis">Full Node APIs</a><ul>
+<li><a class="reference internal" href="#signtransaction">signTransaction</a></li>
+<li><a class="reference internal" href="#id1">signTransaction</a></li>
+<li><a class="reference internal" href="#id2">signTransaction</a></li>
+<li><a class="reference internal" href="#id3">signTransaction</a></li>
+<li><a class="reference internal" href="#generateaddress">generateAddress</a></li>
+<li><a class="reference internal" href="#transfer">Transfer</a></li>
+<li><a class="reference internal" href="#transfertrc10">TransferTrc10</a></li>
+<li><a class="reference internal" href="#freezebalance">freezeBalance</a></li>
+<li><a class="reference internal" href="#unfreezebalance">unfreezeBalance</a></li>
+<li><a class="reference internal" href="#votewitness">voteWitness</a></li>
+<li><a class="reference internal" href="#getnowblock">getNowBlock</a></li>
+<li><a class="reference internal" href="#getblockbynum">getBlockByNum</a></li>
+<li><a class="reference internal" href="#getblockbylatestnum">getBlockByLatestNum</a></li>
+<li><a class="reference internal" href="#getnodeinfo">getNodeInfo</a></li>
+<li><a class="reference internal" href="#listnodes">listNodes</a></li>
+<li><a class="reference internal" href="#gettransactioninfobyblocknum">getTransactionInfoByBlockNum</a></li>
+<li><a class="reference internal" href="#gettransactioninfobyid">getTransactionInfoById</a></li>
+<li><a class="reference internal" href="#getaccount">getAccount</a></li>
+<li><a class="reference internal" href="#listwitnesses">listWitnesses</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#solidity-node-apis">Solidity Node APIs</a><ul>
+<li><a class="reference internal" href="#getaccountsolidity">getAccountSolidity</a></li>
+<li><a class="reference internal" href="#getnowblocksolidity">getNowBlockSolidity</a></li>
+<li><a class="reference internal" href="#gettransactionbyidsolidity">getTransactionByIdSolidity</a></li>
+<li><a class="reference internal" href="#getrewardsolidity">getRewardSolidity</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="RPC%20API%20Client.html"
+                        title="previous chapter">RPC API Client</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Contract.html"
+                        title="next chapter">Contract</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/mddocs/RPC APIs.md.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="Contract.html" title="Contract"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="RPC%20API%20Client.html" title="RPC API Client"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Tronj 0.1.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">RPC APIs</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Sakary.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.3.1.
+    </div>
+  </body>
+</html>

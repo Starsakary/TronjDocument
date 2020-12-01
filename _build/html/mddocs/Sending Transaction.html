@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sending Transaction &#8212; Tronj 0.1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Smart Contract" href="Smart%20Contract.html" />
+    <link rel="prev" title="Quickstart" href="Quickstart.html" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="../_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+  </head><body>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="Smart%20Contract.html" title="Smart Contract"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Quickstart.html" title="Quickstart"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Tronj 0.1.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Sending Transaction</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sending-transaction">
+<h1>Sending Transaction<a class="headerlink" href="#sending-transaction" title="Permalink to this headline">¶</a></h1>
+<p>Any operation contracting with TRON network is a transaction. A transaction can be TRX transfer, TRC-10 transfer, freezing &amp; unfreezing, voting, Etc.</p>
+<div class="section" id="the-routine-for-sending">
+<h2>The routine for sending<a class="headerlink" href="#the-routine-for-sending" title="Permalink to this headline">¶</a></h2>
+<p>A normal routine for sending a transaction is:</p>
+<blockquote>
+<div><p>Create -&gt; Sign -&gt; Broadcast -&gt; (wait) -&gt; Lookup and get receipt</p>
+</div></blockquote>
+<p>Tronj defines the same protobufs include all RPC APIs and transaction related classes, also, Tronj wraps the functions in <code class="docutils literal notranslate"><span class="pre">TronClient.class</span></code>.</p>
+<div class="section" id="an-simple-example">
+<h3>An simple example<a class="headerlink" href="#an-simple-example" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">sendTrx</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;============= TRC transfer =============&quot;</span><span class="p">);</span>
+        <span class="n">TronClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">TronClient</span><span class="p">.</span><span class="na">ofNile</span><span class="p">(</span><span class="s">&quot;3333333333333333333333333333333333333333333333333333333333333333&quot;</span><span class="p">);</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="n">client</span><span class="p">.</span><span class="na">transfer</span><span class="p">(</span><span class="s">&quot;TJRabPrwbZy45sbavfcjinPJC18kjpRTv8&quot;</span><span class="p">,</span> <span class="s">&quot;TVjsyZ7fYF3qLF6BQgPmTEZy1xrNNyVAAA&quot;</span><span class="p">,</span> <span class="mi">2_000_000</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;error: &quot;</span> <span class="o">+</span> <span class="n">e</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+<p>In Tronj, the routine is:</p>
+<ol class="simple">
+<li><p>Create a <code class="docutils literal notranslate"><span class="pre">TronClient</span></code> object with your private key.</p></li>
+<li><p>According to the function create a contract defined in the protobuf.</p></li>
+<li><p>User <code class="docutils literal notranslate"><span class="pre">TransactionBuilder</span> </code> to set memo, fee limit, Etc.</p></li>
+<li><p>Call <code class="docutils literal notranslate"><span class="pre">TronClient.signTransaction()</span></code>to sign the transaction with your private key binding with the <code class="docutils literal notranslate"><span class="pre">TronClient</span></code> object.</p></li>
+<li><p>Call <code class="docutils literal notranslate"><span class="pre">TronClient.broadcastTransaction()</span></code> to broadcast the transaction and get a <code class="docutils literal notranslate"><span class="pre">TransactionReturn</span></code> for analysis.</p></li>
+</ol>
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Sending Transaction</a><ul>
+<li><a class="reference internal" href="#the-routine-for-sending">The routine for sending</a><ul>
+<li><a class="reference internal" href="#an-simple-example">An simple example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Quickstart.html"
+                        title="previous chapter">Quickstart</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Smart%20Contract.html"
+                        title="next chapter">Smart Contract</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/mddocs/Sending Transaction.md.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="Smart%20Contract.html" title="Smart Contract"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Quickstart.html" title="Quickstart"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Tronj 0.1.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Sending Transaction</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Sakary.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.3.1.
+    </div>
+  </body>
+</html>
