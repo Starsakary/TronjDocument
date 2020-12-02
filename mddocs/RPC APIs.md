@@ -455,7 +455,7 @@ TransactionInfoList object.
 
 **THROWS**  
 
-IllegalException, if the parameters are not correct.  
+IllegalException, if the parameters are not correct or zero transaction included.
 
 **EXAMPLE** 
  
@@ -470,6 +470,7 @@ public void getTransactionInfoByBlockNum() {
         }
     }
 ```
+
 
 ### getTransactionInfoById 
 

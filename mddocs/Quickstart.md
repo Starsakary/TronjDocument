@@ -63,6 +63,14 @@ TronClient client = ofMainnet("your private key");
 // TronClient client = ofNile("your private key");
 ```
 
+### With private net
+
+If using a private net, you may use another constructor: `TronClient(String grpcEndpoint, String grpcEndpointSolidity, String hexPrivateKey)`
+
+```java
+TronClient client = new TronClient("127.0.0.1:50051", "127.0.0.1:50052", "your private key");
+```
+
 Aftre binding your private key with the `TronClient` object, your are ready to build, sign and broadcast your transactions.
 
 
