@@ -1,4 +1,4 @@
-murray==0.6.4
+sphinx_materialdesign_theme==0.1.11
 
 recommonmark==0.6.0
 
