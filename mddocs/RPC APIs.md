@@ -133,7 +133,7 @@ public void sendTrx() {
 
 Transfers TRC10 Asset  
 
-**BODY PARAMS**  
+**PARAMS**  
 
 *1. fromAddress(String)**  
 
@@ -178,7 +178,7 @@ public void transferTrc10(){
 
 Freeze balance to get energy or bandwidth, for 3 days.  
 
-**BODY PARAMS**  
+**PARAMS**  
 
 *1. ownerAddress(String)**  
 
@@ -222,7 +222,7 @@ public void freezeBalance() {
 
 Unfreeze balance to get TRX back.  
 
-**BODY PARAMS**  
+**PARAMS**  
 
 *1. ownerAddress(String)**  
 
@@ -259,7 +259,7 @@ public void unFreezeBalance() {
 
 Vote for witnesses  
 
-**BODY PARAMS**  
+**PARAMS**  
 
 *1. ownerAddress(String)**  
 
@@ -325,7 +325,7 @@ public void getNowBlock() {
 
 Returns the Block Object corresponding to the 'Block Height' specified (number of blocks preceding it).  
 
-**BODY PARAMS**  
+**PARAMS**  
 
 *1. blockNum(long)**  
 
@@ -358,7 +358,7 @@ public void getBlockByNum() {
 
 Get some latest blocks.  
 
-**BODY PARAMS**  
+**PARAMS**  
 
 *1. num(long)**  
 
@@ -443,7 +443,7 @@ public void listNodes() {
 
 Get transactionInfo from block number.  
 
-**BODY PARAMS**  
+**PARAMS**  
 
 *1. blockNum(long)**  
 
@@ -475,7 +475,7 @@ public void getTransactionInfoByBlockNum() {
 
 Query the transaction fee, block height by transaction id.
 
-**BODY PARAMS**  
+**PARAMS**  
 
 *1. txID(String)**  
 
@@ -507,7 +507,7 @@ public void getTransactionInfoById() {
 
 Get account info by address.  
 
-**BODY PARAMS**  
+**PARAMS**  
 
 *1. address(String)**  
 
@@ -563,7 +563,7 @@ public void listWitnesses(){
 
 Get solid account info by address.  
 
-**BODY PARAMS**  
+**PARAMS**  
 
 *1. address(String)**  
 
@@ -621,7 +621,7 @@ public void getNowBlockSolidity() {
 
 Get transaction receipt info from a transaction id, must be in solid block.  
 
-**BODY PARAMS**  
+**PARAMS**  
 
 *1. txID(String)** 
 
@@ -653,7 +653,7 @@ public void getTransactionByIdSolidity() {
 
 Get the rewards that the voter has not received.  
 
-**BODY PARAMS**  
+**PARAMS**  
 
 *1. address(String)**  
 
