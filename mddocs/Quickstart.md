@@ -20,14 +20,14 @@ Then add `abi` as dependency.
 dependencies {
     ....
 
-    implementation 'org.tron.tronj:abi:0.4.0'
-    implementation 'org.tron.tronj:client:0.4.0'
+    implementation 'org.tron.tronj:abi:0.1.0'
+    implementation 'org.tron.tronj:client:0.1.0'
 
     ....
 }
 ```
 
-###Maven Settings
+### Maven Setting
 
 Use maven repo setting from Bintray.
 
@@ -35,7 +35,7 @@ Use maven repo setting from Bintray.
 <dependency>
   <groupId>org.tron.tronj</groupId>
   <artifactId>abi</artifactId>
-  <version>0.4.0</version>
+  <version>0.1.0</version>
   <type>pom</type>
 </dependency>
 ```
