@@ -74,13 +74,26 @@ Generate random address.
 
 **RETURN**  
 
-Address in hex.
+Address in hex.  
+
+**EXAMPLE** 
+ 
+```java
+public void generateAddress() {
+        System.out.println("============= generateAddress =============");
+        try {
+            System.out.println(TronClient.generateAddress());
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+```
 
 ### Transfer
 
 Transfer TRX. amount in SUN. 
 
-**PARAMS**  
+**PARAMS**
 
 *1. fromAddress(String)**  
 
@@ -100,7 +113,21 @@ Transaction, including execution results.
 
 **THROWS**  
 
-IllegalException, if fail to transfer.
+IllegalException, if fail to transfer.  
+
+**EXAMPLE** 
+
+```java
+public void sendTrx() {
+        System.out.println("============= TRC transfer =============");
+        TronClient client = TronClient.ofShasta("3333333333333333333333333333333333333333333333333333333333333333");
+        try {
+            System.out.println(client.transfer("TJvznvPr4iGRT2FL7ZBHKLGWt7QgScWLnw", "TP8LKAf3R3FHDAcrQXuwBEWmaGrrUdRvzb", 1_000_000));
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+```
 
 ### TransferTrc10
 
@@ -130,7 +157,22 @@ Transaction, including execution results.
 
 **THROWS**  
 
-IllegalException, if fail to transfer trc10.
+IllegalException, if fail to transfer trc10.  
+
+**EXAMPLE** 
+ 
+```java
+public void transferTrc10(){
+        System.out.println("============= transferTrc10 =============");
+        TronClient client = TronClient.ofShasta("3333333333333333333333333333333333333333333333333333333333333333");
+        try {
+            System.out.println(client.transferTrc10("TDCm25Qp6y6r3Q52qr8m3YQk8VMX1MhBu9", "TP8LKAf3R3FHDAcrQXuwBEWmaGrrUdRvzb",
+                    1000322, 1_000_000));
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+```
 
 ### freezeBalance
 
@@ -154,37 +196,27 @@ TRX freeze duration, only be specified as 3 days.
 
 resource type, can be "ENERGY" or "BANDWIDTH"
 
-```java
-public TransactionReturn freezeBalance(String ownerAddress, long frozenBalance, long frozenDuration, int resourceCode) throws IllegalException{
-
-        ByteString rawFrom = parseAddress(ownerAddress);
-        FreezeBalanceContract freezeBalanceContract=
-                FreezeBalanceContract.newBuilder()
-                        .setOwnerAddress(rawFrom)
-                        .setFrozenBalance(frozenBalance)
-                        .setFrozenDuration(frozenDuration)
-                        .setResourceValue(resourceCode)
-                        .build();
-        TransactionExtention txnExt = blockingStub.freezeBalance2(freezeBalanceContract);
-
-        if(SUCCESS != txnExt.getResult().getCode()){
-            throw new IllegalException(txnExt.getResult().getMessage().toStringUtf8());
-        }
-
-        Transaction signedTxn = signTransaction(txnExt);
-
-        TransactionReturn ret = blockingStub.broadcastTransaction(signedTxn);
-        return ret;
-    }
-```
-
 **RETURN**  
 
 Transaction, including execution results.  
 
 **THROWS**  
 
-IllegalException, if fail to freeze balance.
+IllegalException, if fail to freeze balance.  
+
+**EXAMPLE** 
+ 
+```java
+public void freezeBalance() {
+        System.out.println("============= freeze balance =============");
+        TronClient client = TronClient.ofShasta("3333333333333333333333333333333333333333333333333333333333333333");
+        try {
+            System.out.println(client.freezeBalance("TT7wFAHH3LJnhAZMPVEQXm6MCjTJvkh4HP", 1_000_000L, 3L,1));
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+```
 
 ### unfreezeBalance 
 
@@ -206,7 +238,22 @@ Transaction, including execution results.
 
 **THROWS**  
 
-IllegalException, if fail to unfreeze balance.
+IllegalException, if fail to unfreeze balance.  
+
+**EXAMPLE** 
+ 
+```java
+public void unFreezeBalance() {
+        System.out.println("============= unFreeze balance =============");
+        TronClient client = TronClient.ofNile("3333333333333333333333333333333333333333333333333333333333333333");
+
+        try {
+            System.out.println(client.unfreezeBalance("TJE6PX8c66Tvn8sR9VtybcmB7EYSjUYMzZ", 1));
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+```
 
 ### voteWitness 
 
@@ -224,30 +271,29 @@ key: 'vote_address' stands for the address of the witness you want to vote, defa
 
 value: 'vote_count' stands for the number of votes you want to vote.
 
-```java
-public TransactionReturn voteWitness(String ownerAddress, HashMap<String, String> votes) throws IllegalException{
-        ByteString rawFrom = parseAddress(ownerAddress);
-        VoteWitnessContract voteWitnessContract = createVoteWitnessContract(rawFrom, votes);
-        TransactionExtention txnExt = blockingStub.voteWitnessAccount2(voteWitnessContract);
-
-        if(SUCCESS != txnExt.getResult().getCode()){
-            throw new IllegalException(txnExt.getResult().getMessage().toStringUtf8());
-        }
-
-        Transaction signedTxn = signTransaction(txnExt);
-
-        TransactionReturn ret = blockingStub.broadcastTransaction(signedTxn);
-
-        return ret;
-    }
-```  
 **RETURN**  
 
 Transaction, including execution results.  
 
 **THROWS**  
 
-IllegalException, if fail to vote witness.
+IllegalException, if fail to vote witness.  
+
+**EXAMPLE** 
+ 
+```java
+public void voteWitness(){
+        System.out.println("============= voteWitness =============");
+        TronClient client = TronClient.ofShasta("3333333333333333333333333333333333333333333333333333333333333333");
+        HashMap<String, String> witness = new HashMap<>();
+        witness.put("41F16412B9A17EE9408646E2A21E16478F72ED1E95","-1");
+        try {
+            System.out.println(client.voteWitness("TJRabPrwbZy45sbavfcjinPJC18kjpRTv8",witness));
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+```
 
 ### getNowBlock
 
@@ -259,7 +305,21 @@ Block object.
 
 **THROWS**  
 
-IllegalException, if fail to get now block.
+IllegalException, if fail to get now block.  
+
+**EXAMPLE** 
+ 
+```java
+public void getNowBlock() {
+        System.out.println("============= getNowBlock =============");
+        TronClient client = TronClient.ofShasta("3333333333333333333333333333333333333333333333333333333333333333");
+        try {
+            System.out.println(client.getNowBlock());
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+```
 
 ### getBlockByNum  
 
@@ -277,7 +337,22 @@ Block object.
 
 **THROWS**  
 
-IllegalException, if the parameters are not correct.
+IllegalException, if the parameters are not correct.  
+
+**EXAMPLE** 
+ 
+```java
+public void getBlockByNum() {
+        System.out.println("============= getBlockByNum =============");
+        TronClient client = TronClient.ofNile("3333333333333333333333333333333333333333333333333333333333333333");
+        try {
+            Block block = client.getBlockByNum(10);
+            System.out.println(block);
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+```
 
 ### getBlockByLatestNum 
 
@@ -295,7 +370,22 @@ BlockListExtention object.
 
 **THROWS**  
 
-IllegalException, if the parameters are not correct.
+IllegalException, if the parameters are not correct.  
+
+**EXAMPLE** 
+ 
+```java
+public void getBlockByLatestNum() {
+        System.out.println("============= getBlockByLatestNum =============");
+        TronClient client = TronClient.ofNile("3333333333333333333333333333333333333333333333333333333333333333");
+        try {
+            BlockListExtention blockListExtention = client.getBlockByLatestNum(10);
+            System.out.println(blockListExtention);
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+```
 
 ### getNodeInfo
 
@@ -307,7 +397,21 @@ NodeInfo object.
 
 **THROWS**  
 
-IllegalException, if fail to get nodeInfo.
+IllegalException, if fail to get nodeInfo.  
+
+**EXAMPLE** 
+ 
+```java
+public void getNodeInfo() {
+        System.out.println("============= getNodeInfo=============");
+        TronClient client = TronClient.ofNile("3333333333333333333333333333333333333333333333333333333333333333");
+        try {
+            System.out.println(client.getNodeInfo());
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+```
 
 ### listNodes
 
@@ -319,7 +423,21 @@ NodeList object.
 
 **THROWS**  
 
-IllegalException, if fail to get node list.
+IllegalException, if fail to get node list.  
+
+**EXAMPLE** 
+ 
+```java
+public void listNodes() {
+        System.out.println("============= listNodes=============");
+        TronClient client = TronClient.ofNile("3333333333333333333333333333333333333333333333333333333333333333");
+        try {
+            System.out.println(client.listNodes());
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+```
 
 ### getTransactionInfoByBlockNum
 
@@ -339,6 +457,21 @@ TransactionInfoList object.
 
 IllegalException, if the parameters are not correct or zero transaction included.
 
+**EXAMPLE** 
+ 
+```java
+public void getTransactionInfoByBlockNum() {
+        System.out.println("============= getTransactionInfoByBlockNum =============");
+        TronClient client = TronClient.ofNile("3333333333333333333333333333333333333333333333333333333333333333");
+        try {
+            System.out.println(client.getTransactionInfoByBlockNum(1));
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+```
+
+
 ### getTransactionInfoById 
 
 Query the transaction fee, block height by transaction id.
@@ -355,7 +488,21 @@ TransactionInfo object.
 
 **THROWS**  
 
-IllegalException, if the parameters are not correct.
+IllegalException, if the parameters are not correct.  
+
+**EXAMPLE** 
+ 
+```java
+public void getTransactionInfoById() {
+        System.out.println("============= getTransactionInfoById =============");
+        TronClient client = TronClient.ofNile("3333333333333333333333333333333333333333333333333333333333333333");
+        try {
+            System.out.println(client.getTransactionInfoById("bd9f37ace1688853ae0db305aa385761e8ae5517a663ec7ef3ed08ea09b393b7"));
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+```
 
 ### getAccount 
 
@@ -373,7 +520,21 @@ Account object.
 
 **THROWS**  
 
-IllegalException, if the parameters are not correct.
+IllegalException, if the parameters are not correct.  
+
+**EXAMPLE** 
+ 
+```java
+public void getAccount(){
+        System.out.println("============= getAccount =============");
+        TronClient client = TronClient.ofShasta("3333333333333333333333333333333333333333333333333333333333333333");
+        try {
+            System.out.println(client.getAccount("TJvznvPr4iGRT2FL7ZBHKLGWt7QgScWLnw"));
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+```
 
 ### listWitnesses 
 
@@ -382,6 +543,20 @@ List all witnesses that current API node is connected to.
 **RETURN**  
 
 WitnessList object.  
+
+**EXAMPLE** 
+ 
+```java
+public void listWitnesses(){
+        System.out.println("============= listWitnesses =============");
+        TronClient client = TronClient.ofNile("3333333333333333333333333333333333333333333333333333333333333333");
+        try {
+            System.out.println(client.listWitnesses());
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+```  
 
 ## Solidity Node APIs
 
@@ -401,7 +576,21 @@ Account object.
 
 **THROWS**  
 
-IllegalException, if the parameters are not correct.
+IllegalException, if the parameters are not correct.  
+
+**EXAMPLE** 
+ 
+```java
+public void getAccountSolidity(){
+        System.out.println("============= getAccountSolidity =============");
+        TronClient client = TronClient.ofShasta("3333333333333333333333333333333333333333333333333333333333333333");
+        try {
+            System.out.println(client.getAccountSolidity("TKwVM5tsELuTE3a5SUCWiQyVtEgxejL5Wj"));
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+```  
 
 ### getNowBlockSolidity  
 
@@ -413,7 +602,21 @@ BlockExtention object.
 
 **THROWS**  
 
-IllegalException, if fail to get now block.
+IllegalException, if fail to get now block.  
+
+**EXAMPLE** 
+ 
+```java
+public void getNowBlockSolidity() {
+        System.out.println("============= getNowBlockSolidity =============");
+        TronClient client = TronClient.ofNile("3333333333333333333333333333333333333333333333333333333333333333");
+        try {
+            System.out.println(client.getNowBlockSolidity());
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+```
 
 ### getTransactionByIdSolidity
 
@@ -421,7 +624,7 @@ Get transaction receipt info from a transaction id, must be in solid block.
 
 **PARAMS**  
 
-*1. txID(String)**  
+*1. txID(String)** 
 
 Transaction hash, i.e. transaction id.  
 
@@ -431,7 +634,21 @@ Transaction object.
 
 **THROWS**  
 
-IllegalException, if the parameters are not correct.
+IllegalException, if the parameters are not correct.  
+
+**EXAMPLE** 
+ 
+```java
+public void getTransactionByIdSolidity() {
+        System.out.println("============= getTransactionByIdSolidity =============");
+        TronClient client = TronClient.ofShasta("3333333333333333333333333333333333333333333333333333333333333333");
+        try {
+            System.out.println(client.getTransactionByIdSolidity("3535304212e0090d421ec88cd194d35875b748c0ad453fcde6d7b4d43e852ced"));
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+```
 
 ### getRewardSolidity  
 
@@ -445,5 +662,18 @@ address, default hexString.
 
 **RETURN**  
 
-NumberMessage object.
+NumberMessage object.  
 
+**EXAMPLE** 
+ 
+```java
+public void getRewardSolidity(){
+        System.out.println("============= getRewardSolidity =============");
+        TronClient client = TronClient.ofShasta("3333333333333333333333333333333333333333333333333333333333333333");
+        try {
+            System.out.println(client.getRewardSolidity("TNSdGcMvSDwksounpkN1ZCmA7V5QLEDtWu"));
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+```
