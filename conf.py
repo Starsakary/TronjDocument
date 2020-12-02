@@ -17,6 +17,9 @@
 
 # -- Project information -----------------------------------------------------
 
+from jupyter_sphinx_theme import *
+init_theme()
+
 project = 'Tronj'
 copyright = '2020, Sakary'
 author = 'Sakary'
@@ -49,12 +52,13 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'pyramid'
+# html_theme = 'jupyter-sphinx-theme'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
+html_add_permalinks = ''
 
 source_suffix = ['.rst', '.md']

@@ -14,18 +14,31 @@ repositories {
 }
 ```
 
-Then add `abi` as dependency.
+Add java and application plugins:
+
+```java
+plugins {
+    id 'java'
+    id 'application'
+}
+```
+
+Add required libraries as dependencies. You may change the version to your preferred one.
 
 ```groovy
 dependencies {
-    ....
+    // protobuf & grpc
+    implementation 'com.google.protobuf:protobuf-java:3.11.0'
 
     implementation 'org.tron.tronj:abi:0.1.0'
     implementation 'org.tron.tronj:client:0.1.0'
+    implementation 'org.tron.tronj:utils:0.1.0'
 
-    ....
+    implementation 'com.google.guava:guava:28.0-jre'
 }
 ```
+
+**Note:** This is the minimum gradle setting to work with Tronj.
 
 ### Maven Setting
 
