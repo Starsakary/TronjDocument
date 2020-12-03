@@ -4,7 +4,7 @@ This chapter describes the specific definitions, parameters, return values and e
 
 ## Full Node APIs   
 
-### signTransaction
+### signTransaction(TransactionExtention)
 
 Sign a transactionExtention with the client binding private key.
 
@@ -18,7 +18,7 @@ A TransactionExtention object.
 
 A signed transaction.
 
-### signTransaction
+### signTransaction(Transaction)
 
 Sign a transaction with the client binding private key.
 
@@ -32,7 +32,7 @@ A Transaction object.
 
 A signed transaction.
 
-### signTransaction
+### signTransaction(TransactionExtention, Private key)
 
 Sign a transaction with a private key.
 
@@ -50,7 +50,7 @@ The private key to sign the transaction.
 
 A signed transaction.
 
-### signTransaction
+### signTransaction(Transaction, Private key)
 
 Sign a transactionExtention with a private key.
 
@@ -120,9 +120,13 @@ IllegalException, if fail to transfer.
 ```java
 public void sendTrx() {
         System.out.println("============= TRC transfer =============");
-        TronClient client = TronClient.ofShasta("3333333333333333333333333333333333333333333333333333333333333333");
+        TronClient client = TronClient.ofNile("your privateKey");
         try {
-            System.out.println(client.transfer("TJvznvPr4iGRT2FL7ZBHKLGWt7QgScWLnw", "TP8LKAf3R3FHDAcrQXuwBEWmaGrrUdRvzb", 1_000_000));
+            TransactionExtention transaction = client.transfer("owner address", "TP8LKAf3R3FHDAcrQXuwBEWmaGrrUdRvzb", 1_000_000);
+            Transaction signedTxn = client.signTransaction(transaction);
+            System.out.println(signedTxn.toString());
+            TransactionReturn ret = client.broadcastTransaction(signedTxn);
+            System.out.println("======== Result ========\n" + ret.toString());
         } catch (Exception e) {
             System.out.println("error: " + e);
         }
@@ -164,10 +168,14 @@ IllegalException, if fail to transfer trc10.
 ```java
 public void transferTrc10(){
         System.out.println("============= transferTrc10 =============");
-        TronClient client = TronClient.ofShasta("3333333333333333333333333333333333333333333333333333333333333333");
+        TronClient client = TronClient.ofNile("your privateKey");
         try {
-            System.out.println(client.transferTrc10("TDCm25Qp6y6r3Q52qr8m3YQk8VMX1MhBu9", "TP8LKAf3R3FHDAcrQXuwBEWmaGrrUdRvzb",
-                    1000322, 1_000_000));
+            TransactionExtention transactionExtention = client.transferTrc10("owner address", "TP8LKAf3R3FHDAcrQXuwBEWmaGrrUdRvzb",
+                    1000016, 1_000_000);
+            Transaction signedTxn = client.signTransaction(transactionExtention);
+            System.out.println(signedTxn.toString());
+            TransactionReturn ret = client.broadcastTransaction(signedTxn);
+            System.out.println("======== Result ========\n" + ret.toString());
         } catch (Exception e) {
             System.out.println("error: " + e);
         }
@@ -209,9 +217,13 @@ IllegalException, if fail to freeze balance.
 ```java
 public void freezeBalance() {
         System.out.println("============= freeze balance =============");
-        TronClient client = TronClient.ofShasta("3333333333333333333333333333333333333333333333333333333333333333");
+        TronClient client = TronClient.ofNile("your privateKey");
         try {
-            System.out.println(client.freezeBalance("TT7wFAHH3LJnhAZMPVEQXm6MCjTJvkh4HP", 1_000_000L, 3L,1));
+            TransactionExtention transaction = client.freezeBalance("owner address", 1_000_000L, 3L,1);
+            Transaction signedTxn = client.signTransaction(transaction);
+            System.out.println(signedTxn.toString());
+            TransactionReturn ret = client.broadcastTransaction(signedTxn);
+            System.out.println("======== Result ========\n" + ret.toString());
         } catch (Exception e) {
             System.out.println("error: " + e);
         }
@@ -245,10 +257,13 @@ IllegalException, if fail to unfreeze balance.
 ```java
 public void unFreezeBalance() {
         System.out.println("============= unFreeze balance =============");
-        TronClient client = TronClient.ofNile("3333333333333333333333333333333333333333333333333333333333333333");
-
+        TronClient client = TronClient.ofNile("your privateKey");
         try {
-            System.out.println(client.unfreezeBalance("TJE6PX8c66Tvn8sR9VtybcmB7EYSjUYMzZ", 1));
+            TransactionExtention transaction = client.unfreezeBalance("owner address", 1);
+            Transaction signedTxn = client.signTransaction(transaction);
+            System.out.println(signedTxn.toString());
+            TransactionReturn ret = client.broadcastTransaction(signedTxn);
+            System.out.println("======== Result ========\n" + ret.toString());
         } catch (Exception e) {
             System.out.println("error: " + e);
         }
@@ -284,11 +299,15 @@ IllegalException, if fail to vote witness.
 ```java
 public void voteWitness(){
         System.out.println("============= voteWitness =============");
-        TronClient client = TronClient.ofShasta("3333333333333333333333333333333333333333333333333333333333333333");
         HashMap<String, String> witness = new HashMap<>();
-        witness.put("41F16412B9A17EE9408646E2A21E16478F72ED1E95","-1");
+        TronClient client = TronClient.ofNile("your privateKey");
         try {
-            System.out.println(client.voteWitness("TJRabPrwbZy45sbavfcjinPJC18kjpRTv8",witness));
+            witness.put("TG7RHXaL7E9rqSkBavX7s1vtikoz6np6bD","1");
+            TransactionExtention transaction = client.voteWitness("owner address",witness);
+            Transaction signedTxn = client.signTransaction(transaction);
+            System.out.println(signedTxn.toString());
+            TransactionReturn ret = client.broadcastTransaction(signedTxn);
+            System.out.println("======== Result ========\n" + ret.toString());
         } catch (Exception e) {
             System.out.println("error: " + e);
         }
@@ -464,7 +483,7 @@ public void getTransactionInfoByBlockNum() {
         System.out.println("============= getTransactionInfoByBlockNum =============");
         TronClient client = TronClient.ofNile("3333333333333333333333333333333333333333333333333333333333333333");
         try {
-            System.out.println(client.getTransactionInfoByBlockNum(1));
+            System.out.println(client.getTransactionInfoByBlockNum(11359274));
         } catch (Exception e) {
             System.out.println("error: " + e);
         }
@@ -497,7 +516,7 @@ public void getTransactionInfoById() {
         System.out.println("============= getTransactionInfoById =============");
         TronClient client = TronClient.ofNile("3333333333333333333333333333333333333333333333333333333333333333");
         try {
-            System.out.println(client.getTransactionInfoById("bd9f37ace1688853ae0db305aa385761e8ae5517a663ec7ef3ed08ea09b393b7"));
+            System.out.println(client.getTransactionInfoById("786c7516df88941e33ea44f03e637bd8c1ddcfd058634574102c6e3cfb93de0d"));
         } catch (Exception e) {
             System.out.println("error: " + e);
         }
@@ -529,7 +548,7 @@ public void getAccount(){
         System.out.println("============= getAccount =============");
         TronClient client = TronClient.ofShasta("3333333333333333333333333333333333333333333333333333333333333333");
         try {
-            System.out.println(client.getAccount("TJvznvPr4iGRT2FL7ZBHKLGWt7QgScWLnw"));
+            System.out.println(client.getAccount("TKwVM5tsELuTE3a5SUCWiQyVtEgxejL5Wj"));
         } catch (Exception e) {
             System.out.println("error: " + e);
         }
@@ -671,7 +690,7 @@ public void getRewardSolidity(){
         System.out.println("============= getRewardSolidity =============");
         TronClient client = TronClient.ofShasta("3333333333333333333333333333333333333333333333333333333333333333");
         try {
-            System.out.println(client.getRewardSolidity("TNSdGcMvSDwksounpkN1ZCmA7V5QLEDtWu"));
+            System.out.println(client.getRewardSolidity("TKryTFSUB2UY8jMVc3Rz3ofiUPrnR6pRAs"));
         } catch (Exception e) {
             System.out.println("error: " + e);
         }

@@ -15,9 +15,13 @@ Tronj defines the same protobufs include all RPC APIs and transaction related cl
 ```java
 public void sendTrx() {
         System.out.println("============= TRC transfer =============");
-        TronClient client = TronClient.ofNile("3333333333333333333333333333333333333333333333333333333333333333");
+        TronClient client = TronClient.ofNile("your privateKey");
         try {
-            client.transfer("TJRabPrwbZy45sbavfcjinPJC18kjpRTv8", "TVjsyZ7fYF3qLF6BQgPmTEZy1xrNNyVAAA", 2_000_000);
+            TransactionExtention transactionExtention = client.transfer("owner address", "TP8LKAf3R3FHDAcrQXuwBEWmaGrrUdRvzb", 1_000_000);
+            Transaction signedTxn = client.signTransaction(transactionExtention);
+            System.out.println(signedTxn.toString());
+            TransactionReturn ret = client.broadcastTransaction(signedTxn);
+            System.out.println("======== Result ========\n" + ret.toString());
         } catch (Exception e) {
             System.out.println("error: " + e);
         }
