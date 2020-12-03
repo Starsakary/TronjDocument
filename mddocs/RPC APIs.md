@@ -4,7 +4,7 @@ This chapter describes the specific definitions, parameters, return values and e
 
 ## Full Node APIs   
 
-### signTransaction
+### signTransaction(TransactionExtention)
 
 Sign a transactionExtention with the client binding private key.
 
@@ -18,7 +18,7 @@ A TransactionExtention object.
 
 A signed transaction.
 
-### signTransaction
+### signTransaction(Transaction)
 
 Sign a transaction with the client binding private key.
 
@@ -32,7 +32,7 @@ A Transaction object.
 
 A signed transaction.
 
-### signTransaction
+### signTransaction(TransactionExtention, Private key)
 
 Sign a transaction with a private key.
 
@@ -50,7 +50,7 @@ The private key to sign the transaction.
 
 A signed transaction.
 
-### signTransaction
+### signTransaction(Transaction, Private key)
 
 Sign a transactionExtention with a private key.
 
