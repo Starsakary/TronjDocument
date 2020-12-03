@@ -12,14 +12,14 @@ The APIs can be simply divided into two types: *system contract* and *smart cont
 
 Tron network has two types of resources: *bandwidth* and *energy*. *System contracts* consume only bandwidth and *Smart contracts* may need both(only trigger calls).
 
-### System Contract. 
+### System Contract
 
 System contract is one feature of TRON network.  
 
-A Transaction in TRON is a system contract call, the TronClient(transaction) APIs include two types: *Send a transaction APIs* and *Query APIs*.
+A Transaction equals to a system contract call, there are two types of APIs: *Transaction API* and *Query API*.
 
 #### Send a transaction APIs
-The routine for sending refers to [Sending Transaction](https://github.com/Starsakary/TronjDocs/blob/develop/source/mddocs/Sending%20Transaction.md).
+The routine of sending transactions is: [Sending Transaction](Sending Transaction.md).
 
 **# transfer(String from, String to, long amount)**
 
@@ -68,7 +68,7 @@ public void getNowBlock() {
 
 ### Smart Contract
 
-There are two types of smart contract calls: constant and trigger. Refer to [Smart Contract](https://github.com/Starsakary/TronjDocs/blob/develop/source/mddocs/Smart%20Contract.md).
+There are two types of smart contract calls: constant and trigger. Refer to [Smart Contract](Smart Contract.md).
 
 
 
