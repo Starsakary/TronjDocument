@@ -53,6 +53,8 @@ Tronj wraps query APIs. With a TronClient instance, you can call the APIs simply
 
 **getNowBlock()**
 
+This is the function code, demo code refer to [RPC_APIs](RPC_APIs.md)
+
 Get the latest block
 
 ```java
