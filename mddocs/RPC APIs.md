@@ -535,11 +535,7 @@ Get account info by address.
 
 **RETURN**  
 
-Account object.  
-
-**THROWS**  
-
-IllegalException, if the parameters are not correct.  
+Account object.    
 
 **EXAMPLE** 
  
@@ -591,11 +587,7 @@ Get solid account info by address.
 
 **RETURN**  
 
-Account object.  
-
-**THROWS**  
-
-IllegalException, if the parameters are not correct.  
+Account object.   
 
 **EXAMPLE** 
  
