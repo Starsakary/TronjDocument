@@ -109,7 +109,7 @@ Transfer TRX. amount in SUN.
 
 **RETURN**  
 
-Transaction, including execution results.  
+TransactionExtention, including execution results.  
 
 **THROWS**  
 
@@ -157,7 +157,7 @@ Transfers TRC10 Asset
 
 **RETURN**  
 
-Transaction, including execution results.  
+TransactionExtention, including execution results.  
 
 **THROWS**  
 
@@ -206,7 +206,7 @@ Freeze balance to get energy or bandwidth, for 3 days.
 
 **RETURN**  
 
-Transaction, including execution results.  
+TransactionExtention, including execution results.  
 
 **THROWS**  
 
@@ -246,7 +246,7 @@ Unfreeze balance to get TRX back.
 
 **RETURN**  
 
-Transaction, including execution results.  
+TransactionExtention, including execution results.  
 
 **THROWS**  
 
@@ -288,7 +288,7 @@ Vote for witnesses
 
 **RETURN**  
 
-Transaction, including execution results.  
+TransactionExtention, including execution results.  
 
 **THROWS**  
 
