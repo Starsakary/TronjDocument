@@ -21,29 +21,28 @@ A Transaction equals to a system contract call, there are two types of APIs: *Tr
 #### Send a transaction APIs
 The routine of sending transactions is: [Sending Transaction](Sending Transaction.md).
 
-**transfer(String from, String to, long amount)**
+**transfer(String fromAddress, String toAddress, long amount)**
 
 Transfer TRX. amount in SUN
 
 ```java
-public TransactionReturn transfer(String from, String to, long amount) {
+public TransactionExtention transfer(String fromAddress, String toAddress, long amount) throws IllegalException {
 
-        ByteString rawFrom = parseAddress(from);
-        ByteString rawTo = parseAddress(to);
+        ByteString rawFrom = parseAddress(fromAddress);
+        ByteString rawTo = parseAddress(toAddress);
 
         TransferContract req = TransferContract.newBuilder()
                 .setOwnerAddress(rawFrom)
                 .setToAddress(rawTo)
                 .setAmount(amount)
                 .build();
-
         TransactionExtention txnExt = blockingStub.createTransaction2(req);
 
-        Transaction signedTxn = signTransaction(txnExt);
+        if(SUCCESS != txnExt.getResult().getCode()){
+            throw new IllegalException(txnExt.getResult().getMessage().toStringUtf8());
+        }
 
-        TransactionReturn ret = blockingStub.broadcastTransaction(signedTxn);
-        
-        return ret;
+        return txnExt;
     }
 ```
 
@@ -56,15 +55,13 @@ Tronj wraps query APIs. With a TronClient instance, you can call the APIs simply
 Get the latest block
   
 ```java
-public void getNowBlock() {
-        System.out.println("============= getNowBlock =============");
-        TronClient client = TronClient.ofNile("3333333333333333333333333333333333333333333333333333333333333333");
-        try {
-            client.getNowBlock();
-        } catch (Exception e) {
-            System.out.println("error: " + e);
+public Block getNowBlock() throws IllegalException {
+        Block block = blockingStub.getNowBlock(EmptyMessage.newBuilder().build());
+        if(!block.hasBlockHeader()){
+            throw new IllegalException("Fail to get latest block.");
         }
-}
+        return block;
+    }
 ```
 
 ### Smart Contract
