@@ -27,8 +27,11 @@ public void getSmartContract() {
             System.out.println("error: " + e);
         }
     }
+```
 
-//Result
+The result is:
+
+```shell
 Contract name: JST
 Contract functions: 26
 # function name() view returns (string )
@@ -141,7 +144,7 @@ Throws if the function does not match any in the smart contract.
 
 ### triggerCall
 
-Make a trigger call. Trigger calls require signature and broadcasting. Refer to [RPC APIs](RPC APIs.md) for the signing and broadcasting functions.
+Make a trigger call. Trigger calls require signature and broadcasting. Refer to [RPC_APIs](RPC_APIs.md) for the signing and broadcasting functions.
 
 **PARAMS**
 

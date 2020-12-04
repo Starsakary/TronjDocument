@@ -11,10 +11,10 @@ Welcome to Tronj's documentation!
    :caption: Contents:
 
    mddocs/Quickstart.md
-   mddocs/Sending Transaction.md
-   mddocs/Smart Contract.md
-   mddocs/RPC API Client.md
-   mddocs/RPC APIs.md
+   mddocs/Sending_Transaction.md
+   mddocs/Smart_Contract.md
+   mddocs/RPC_API_Client.md
+   mddocs/RPC_APIs.md
    mddocs/Contract.md
 
 

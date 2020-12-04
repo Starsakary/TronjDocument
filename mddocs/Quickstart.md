@@ -16,7 +16,7 @@ repositories {
 
 Add java and application plugins:
 
-```java
+```groovy
 plugins {
     id 'java'
     id 'application'
@@ -56,6 +56,8 @@ Use maven repo setting from Bintray.
 ## Using Tronj
 
 ### Choose net from **main net**, **shasta** or **nile**
+
+**Note**: Binding a private key is mainly for signing required operations. Any hex String conforming to the private key format can be put here if you only queries are needed.
 
 ```java
 TronClient client = Tronclient.ofMainnet("your private key");
