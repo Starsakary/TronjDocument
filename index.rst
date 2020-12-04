@@ -16,6 +16,7 @@ Welcome to Tronj's documentation!
    mddocs/RPC_API_Client.md
    mddocs/RPC_APIs.md
    mddocs/Contract.md
+   mddocs/Release_Notes.md
 
 
 

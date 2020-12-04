@@ -42,7 +42,7 @@ dependencies {
 
 ### Maven Setting
 
-Use maven repo setting from Bintray.
+Use maven repo setting from Bintray. The latest version is **0.1.2**.
 
 ```xml
 <dependency>
