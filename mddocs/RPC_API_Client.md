@@ -19,11 +19,12 @@ System contract is one feature of TRON network.
 A Transaction equals to a system contract call, there are two types of APIs: *Transaction API* and *Query API*.
 
 #### Send a transaction APIs
-The routine of sending transactions is: [Sending Transaction](Sending Transaction.md).
+The routine of sending transactions is: [Sending_Transaction](Sending_Transaction.md).
 
-**# transfer(String fromAddress, String toAddress, long amount)**
+**transfer(String fromAddress, String toAddress, long amount)**
 
 Transfer TRX. amount in SUN
+This is the function code, demo code refer to [RPC_APIs](RPC_APIs.md)
 
 ```java
 public TransactionExtention transfer(String fromAddress, String toAddress, long amount) throws IllegalException {
@@ -47,12 +48,15 @@ public TransactionExtention transfer(String fromAddress, String toAddress, long 
 ```
 
 #### Query APIs
-The Tron wraps many query APIs and utility functions. You can query the chain using a instance.
+Tronj wraps query APIs. With a TronClient instance, you can call the APIs simply like below:
+**Note:** Query APIs don't require signature and broadcasting. You may call query APIs with any hex String conforming to the private key format.
 
-**# getNowBlock()**
+**getNowBlock()**
+
+This is the function code, demo code refer to [RPC_APIs](RPC_APIs.md)
 
 Get the latest block
-  
+
 ```java
 public Block getNowBlock() throws IllegalException {
         Block block = blockingStub.getNowBlock(EmptyMessage.newBuilder().build());
@@ -65,7 +69,7 @@ public Block getNowBlock() throws IllegalException {
 
 ### Smart Contract
 
-There are two types of smart contract calls: constant and trigger. Refer to [Smart Contract](Smart Contract.md).
+There are two types of smart contract calls: constant and trigger. Smart contract operations are different from system contracts. Refer to [Smart_Contract](Smart_Contract.md).
 
 
 

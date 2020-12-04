@@ -34,7 +34,7 @@ public void getSmartContractDemo() {
 
 and the result is:
 
-```java
+```shell
 # function allowance(address _owner, address _spender) view returns (uint256 remaining)
 # function approve(address _spender, uint256 _amount) returns (bool success)
 # function balanceOf(address _owner) view returns (uint256 balance)
