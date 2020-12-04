@@ -1,6 +1,6 @@
 # Quickstart
 
-Tronj is compiled by `jdk13.0.2+8`. From version 0.1.1, it's compitable with jdk8.
+Tronj is compiled by `jdk13.0.2+8`. From version 0.1.1, it's compitable with `jdk8`.
 
 ## Installation
 
