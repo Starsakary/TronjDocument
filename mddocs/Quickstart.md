@@ -1,8 +1,8 @@
 # Quickstart
 
-Tronj is compiled by `jdk13.0.2+8`. From version 0.1.1, it's compitable with `jdk8`.
+Tronj is compiled by `jdk13.0.2+8`. 
 
-The latest version is **0.1.3**.
+The latest version is **0.1.0**.
 
 ## Installation
 
@@ -34,9 +34,9 @@ dependencies {
     // protobuf & grpc
     implementation 'com.google.protobuf:protobuf-java:3.11.0'
 
-    implementation 'org.tron.tronj:abi:0.1.3'
-    implementation 'org.tron.tronj:client:0.1.3'
-    implementation 'org.tron.tronj:utils:0.1.3'
+    implementation 'org.tron.tronj:abi:0.1.0'
+    implementation 'org.tron.tronj:client:0.1.0'
+    implementation 'org.tron.tronj:utils:0.1.0'
 
     implementation 'com.google.guava:guava:28.0-jre'
 }
@@ -46,13 +46,13 @@ dependencies {
 
 ### Maven Setting
 
-Use maven repo setting from Bintray. The latest version is **0.1.3**.
+Use maven repo setting from Bintray. The latest version is **0.1.0**.
 
 ```xml
 <dependency>
   <groupId>org.tron.tronj</groupId>
   <artifactId>abi</artifactId>
-  <version>0.1.3</version>
+  <version>0.1.0</version>
   <type>pom</type>
 </dependency>
 ```
