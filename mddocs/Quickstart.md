@@ -13,7 +13,7 @@ Add repo setting:
 ```groovy
 repositories {
     maven {
-        url  "https://dl.bintray.com/starsakary/tronj"
+        url  "https://dl.bintray.com/tronj/tronj"
     }
 }
 ```
