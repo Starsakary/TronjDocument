@@ -70,11 +70,11 @@ A signed transaction.
 
 ### generateAddress  
 
-Generate random address.
+Generate a private key offline.
 
 **RETURN**  
 
-Address in hex.  
+A private key.  
 
 **EXAMPLE** 
  
@@ -91,7 +91,7 @@ public void generateAddress() {
 
 ### Transfer
 
-Transfer TRX. amount in SUN. 
+Transfer TRX. The amount is in SUN. 
 
 **PARAMS**
 
@@ -184,7 +184,7 @@ public void transferTrc10(){
 
 ### freezeBalance
 
-Freeze balance to get energy or bandwidth, for 3 days.  
+Freeze balance to get votes and energy or bandwidth, default for 3 days.  
 
 **PARAMS**  
 
@@ -232,7 +232,7 @@ public void freezeBalance() {
 
 ### unfreezeBalance 
 
-Unfreeze balance to get TRX back.  
+Unfreeze the frozen TRX.  
 
 **PARAMS**  
 
@@ -272,7 +272,7 @@ public void unFreezeBalance() {
 
 ### voteWitness 
 
-Vote for witnesses  
+Vote for a witness
 
 **PARAMS**  
 
@@ -324,7 +324,7 @@ Block object.
 
 **THROWS**  
 
-IllegalException, if fail to get now block.  
+IllegalException, if fail to get the latest block.  
 
 **EXAMPLE** 
  
@@ -356,7 +356,7 @@ Block object.
 
 **THROWS**  
 
-IllegalException, if the parameters are not correct.  
+IllegalException, if the parameters are not correct(e.g. block does not exist).  
 
 **EXAMPLE** 
  
@@ -645,7 +645,7 @@ Transaction object.
 
 **THROWS**  
 
-IllegalException, if the parameters are not correct.  
+IllegalException, if the parameters are not correct(e.g. the specified transaction has not been solidified).  
 
 **EXAMPLE** 
  
