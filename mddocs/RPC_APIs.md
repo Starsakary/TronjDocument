@@ -12,7 +12,7 @@ Sign a transactionExtention with the client binding private key.
 
 *1. txnExt(TransactionExtention)*
 
-A TransactionExtention object.
+> A TransactionExtention object.
 
 **RETURN**
 
@@ -26,7 +26,7 @@ Sign a transaction with the client binding private key.
 
 *1. txn(Transaction)*
 
-A Transaction object.
+> A Transaction object.
 
 **RETURN**
 
@@ -40,11 +40,11 @@ Sign a transaction with a private key.
 
 *1. txn(Transaction)*
 
-A Transaction object.
+> A Transaction object.
 
 *2. kp(SECP256K1.KeyPair)*
 
-The private key to sign the transaction.
+> The private key to sign the transaction.
 
 **RETURN**
 
@@ -58,11 +58,11 @@ Sign a transactionExtention with a private key.
 
 *1. txnExt(TransactionExtention)*
 
-A TransactionExtention object.
+> A TransactionExtention object.
 
 *2. kp(SECP256K1.KeyPair)*
 
-The private key to sign the transaction.
+> The private key to sign the transaction.
 
 **RETURN**
 
@@ -70,11 +70,11 @@ A signed transaction.
 
 ### generateAddress  
 
-Generate random address.
+Generate a private key offline.
 
 **RETURN**  
 
-Address in hex.  
+A private key.  
 
 **EXAMPLE** 
  
@@ -91,25 +91,25 @@ public void generateAddress() {
 
 ### Transfer
 
-Transfer TRX. amount in SUN. 
+Transfer TRX. The amount is in SUN. 
 
 **PARAMS**
 
 *1. fromAddress(String)**  
 
-fromAddress is the owner address.
+> fromAddress is the owner address.
 
 *2. toAddress(String)**  
 
-toAddress is the recipient address.  
+> toAddress is the recipient address.  
 
 *3. amount(int)**  
 
-amount is the amount of TRX to transfer in SUN.  
+> amount is the amount of TRX to transfer in SUN.  
 
 **RETURN**  
 
-Transaction, including execution results.  
+TransactionExtention, including execution results.  
 
 **THROWS**  
 
@@ -120,9 +120,13 @@ IllegalException, if fail to transfer.
 ```java
 public void sendTrx() {
         System.out.println("============= TRC transfer =============");
-        TronClient client = TronClient.ofShasta("3333333333333333333333333333333333333333333333333333333333333333");
+        TronClient client = TronClient.ofNile("your privateKey");
         try {
-            System.out.println(client.transfer("TJvznvPr4iGRT2FL7ZBHKLGWt7QgScWLnw", "TP8LKAf3R3FHDAcrQXuwBEWmaGrrUdRvzb", 1_000_000));
+            TransactionExtention transaction = client.transfer("owner address", "TP8LKAf3R3FHDAcrQXuwBEWmaGrrUdRvzb", 1_000_000);
+            Transaction signedTxn = client.signTransaction(transaction);
+            System.out.println(signedTxn.toString());
+            TransactionReturn ret = client.broadcastTransaction(signedTxn);
+            System.out.println("======== Result ========\n" + ret.toString());
         } catch (Exception e) {
             System.out.println("error: " + e);
         }
@@ -137,23 +141,23 @@ Transfers TRC10 Asset
 
 *1. fromAddress(String)**  
 
-fromAddress is the owner address.  
+> fromAddress is the owner address.  
 
 *2. toAddress(String)**  
 
-toAddress is the recipient address.  
+> toAddress is the recipient address.  
 
 *3. tokenId(int)**  
 
-asset name
+> asset name
 
 *4. amount(int)**  
 
-amount is the amount of TRX to transfer in SUN.  
+> amount is the amount of TRX to transfer in SUN.  
 
 **RETURN**  
 
-Transaction, including execution results.  
+TransactionExtention, including execution results.  
 
 **THROWS**  
 
@@ -164,10 +168,14 @@ IllegalException, if fail to transfer trc10.
 ```java
 public void transferTrc10(){
         System.out.println("============= transferTrc10 =============");
-        TronClient client = TronClient.ofShasta("3333333333333333333333333333333333333333333333333333333333333333");
+        TronClient client = TronClient.ofNile("your privateKey");
         try {
-            System.out.println(client.transferTrc10("TDCm25Qp6y6r3Q52qr8m3YQk8VMX1MhBu9", "TP8LKAf3R3FHDAcrQXuwBEWmaGrrUdRvzb",
-                    1000322, 1_000_000));
+            TransactionExtention transactionExtention = client.transferTrc10("owner address", "TP8LKAf3R3FHDAcrQXuwBEWmaGrrUdRvzb",
+                    1000016, 1_000_000);
+            Transaction signedTxn = client.signTransaction(transactionExtention);
+            System.out.println(signedTxn.toString());
+            TransactionReturn ret = client.broadcastTransaction(signedTxn);
+            System.out.println("======== Result ========\n" + ret.toString());
         } catch (Exception e) {
             System.out.println("error: " + e);
         }
@@ -176,29 +184,29 @@ public void transferTrc10(){
 
 ### freezeBalance
 
-Freeze balance to get energy or bandwidth, for 3 days.  
+Freeze balance to get votes and energy or bandwidth, default for 3 days.  
 
 **PARAMS**  
 
 *1. ownerAddress(String)**  
 
-owner address, default hexString.  
+> owner address, default hexString.  
 
 *2. frozenBalance(long)**  
 
-TRX freeze amount, the unit is sun.
+> TRX freeze amount, the unit is sun.
 
 *3. frozenDuration(long)**  
 
-TRX freeze duration, only be specified as 3 days.
+> TRX freeze duration, only be specified as 3 days.
 
 *4. resourceCode(int)**  
 
-resource type, can be "ENERGY" or "BANDWIDTH"
+> resource type, can be "ENERGY" or "BANDWIDTH"
 
 **RETURN**  
 
-Transaction, including execution results.  
+TransactionExtention, including execution results.  
 
 **THROWS**  
 
@@ -209,9 +217,13 @@ IllegalException, if fail to freeze balance.
 ```java
 public void freezeBalance() {
         System.out.println("============= freeze balance =============");
-        TronClient client = TronClient.ofShasta("3333333333333333333333333333333333333333333333333333333333333333");
+        TronClient client = TronClient.ofNile("your privateKey");
         try {
-            System.out.println(client.freezeBalance("TT7wFAHH3LJnhAZMPVEQXm6MCjTJvkh4HP", 1_000_000L, 3L,1));
+            TransactionExtention transaction = client.freezeBalance("owner address", 1_000_000L, 3L,1);
+            Transaction signedTxn = client.signTransaction(transaction);
+            System.out.println(signedTxn.toString());
+            TransactionReturn ret = client.broadcastTransaction(signedTxn);
+            System.out.println("======== Result ========\n" + ret.toString());
         } catch (Exception e) {
             System.out.println("error: " + e);
         }
@@ -220,21 +232,21 @@ public void freezeBalance() {
 
 ### unfreezeBalance 
 
-Unfreeze balance to get TRX back.  
+Unfreeze the frozen TRX.  
 
 **PARAMS**  
 
 *1. ownerAddress(String)**  
 
-owner address, default hexString.  
+> owner address, default hexString.  
 
 *2. resourceCode(int)**  
 
-resource type, can be "ENERGY" or "BANDWIDTH"  
+> resource type, can be "ENERGY" or "BANDWIDTH"  
 
 **RETURN**  
 
-Transaction, including execution results.  
+TransactionExtention, including execution results.  
 
 **THROWS**  
 
@@ -245,10 +257,13 @@ IllegalException, if fail to unfreeze balance.
 ```java
 public void unFreezeBalance() {
         System.out.println("============= unFreeze balance =============");
-        TronClient client = TronClient.ofNile("3333333333333333333333333333333333333333333333333333333333333333");
-
+        TronClient client = TronClient.ofNile("your privateKey");
         try {
-            System.out.println(client.unfreezeBalance("TJE6PX8c66Tvn8sR9VtybcmB7EYSjUYMzZ", 1));
+            TransactionExtention transaction = client.unfreezeBalance("owner address", 1);
+            Transaction signedTxn = client.signTransaction(transaction);
+            System.out.println(signedTxn.toString());
+            TransactionReturn ret = client.broadcastTransaction(signedTxn);
+            System.out.println("======== Result ========\n" + ret.toString());
         } catch (Exception e) {
             System.out.println("error: " + e);
         }
@@ -257,23 +272,23 @@ public void unFreezeBalance() {
 
 ### voteWitness 
 
-Vote for witnesses  
+Vote for a witness
 
 **PARAMS**  
 
 *1. ownerAddress(String)**  
 
-owner address, default hexString.  
+> owner address, default hexString.  
 
 *2. votes(Map)**  
 
-key: 'vote_address' stands for the address of the witness you want to vote, default hexString.  
+> key: 'vote_address' stands for the address of the witness you want to vote, default hexString.  
 
-value: 'vote_count' stands for the number of votes you want to vote.
+> value: 'vote_count' stands for the number of votes you want to vote.
 
 **RETURN**  
 
-Transaction, including execution results.  
+TransactionExtention, including execution results.  
 
 **THROWS**  
 
@@ -284,11 +299,15 @@ IllegalException, if fail to vote witness.
 ```java
 public void voteWitness(){
         System.out.println("============= voteWitness =============");
-        TronClient client = TronClient.ofShasta("3333333333333333333333333333333333333333333333333333333333333333");
         HashMap<String, String> witness = new HashMap<>();
-        witness.put("41F16412B9A17EE9408646E2A21E16478F72ED1E95","-1");
+        TronClient client = TronClient.ofNile("your privateKey");
         try {
-            System.out.println(client.voteWitness("TJRabPrwbZy45sbavfcjinPJC18kjpRTv8",witness));
+            witness.put("TG7RHXaL7E9rqSkBavX7s1vtikoz6np6bD","1");
+            TransactionExtention transaction = client.voteWitness("owner address",witness);
+            Transaction signedTxn = client.signTransaction(transaction);
+            System.out.println(signedTxn.toString());
+            TransactionReturn ret = client.broadcastTransaction(signedTxn);
+            System.out.println("======== Result ========\n" + ret.toString());
         } catch (Exception e) {
             System.out.println("error: " + e);
         }
@@ -305,7 +324,7 @@ Block object.
 
 **THROWS**  
 
-IllegalException, if fail to get now block.  
+IllegalException, if fail to get the latest block.  
 
 **EXAMPLE** 
  
@@ -329,7 +348,7 @@ Returns the Block Object corresponding to the 'Block Height' specified (number o
 
 *1. blockNum(long)**  
 
-blockNum is the block height.  
+> blockNum is the block height.  
 
 **RETURN**  
 
@@ -337,7 +356,7 @@ Block object.
 
 **THROWS**  
 
-IllegalException, if the parameters are not correct.  
+IllegalException, if the parameters are not correct(e.g. block does not exist).  
 
 **EXAMPLE** 
  
@@ -362,7 +381,7 @@ Get some latest blocks.
 
 *1. num(long)**  
 
-Number of latest blocks.  
+> Number of latest blocks.  
 
 **RETURN**  
 
@@ -447,7 +466,7 @@ Get transactionInfo from block number.
 
 *1. blockNum(long)**  
 
-blockNum is the block height.  
+> blockNum is the block height.  
 
 **RETURN**  
 
@@ -464,7 +483,7 @@ public void getTransactionInfoByBlockNum() {
         System.out.println("============= getTransactionInfoByBlockNum =============");
         TronClient client = TronClient.ofNile("3333333333333333333333333333333333333333333333333333333333333333");
         try {
-            System.out.println(client.getTransactionInfoByBlockNum(1));
+            System.out.println(client.getTransactionInfoByBlockNum(11359274));
         } catch (Exception e) {
             System.out.println("error: " + e);
         }
@@ -480,7 +499,7 @@ Query the transaction fee, block height by transaction id.
 
 *1. txID(String)**  
 
-Transaction hash, i.e. transaction id.  
+> Transaction hash, i.e. transaction id.  
 
 **RETURN**  
 
@@ -497,7 +516,7 @@ public void getTransactionInfoById() {
         System.out.println("============= getTransactionInfoById =============");
         TronClient client = TronClient.ofNile("3333333333333333333333333333333333333333333333333333333333333333");
         try {
-            System.out.println(client.getTransactionInfoById("bd9f37ace1688853ae0db305aa385761e8ae5517a663ec7ef3ed08ea09b393b7"));
+            System.out.println(client.getTransactionInfoById("786c7516df88941e33ea44f03e637bd8c1ddcfd058634574102c6e3cfb93de0d"));
         } catch (Exception e) {
             System.out.println("error: " + e);
         }
@@ -512,15 +531,11 @@ Get account info by address.
 
 *1. address(String)**  
 
-address, default hexString.
+> address, default hexString.
 
 **RETURN**  
 
-Account object.  
-
-**THROWS**  
-
-IllegalException, if the parameters are not correct.  
+Account object.    
 
 **EXAMPLE** 
  
@@ -529,7 +544,7 @@ public void getAccount(){
         System.out.println("============= getAccount =============");
         TronClient client = TronClient.ofShasta("3333333333333333333333333333333333333333333333333333333333333333");
         try {
-            System.out.println(client.getAccount("TJvznvPr4iGRT2FL7ZBHKLGWt7QgScWLnw"));
+            System.out.println(client.getAccount("TKwVM5tsELuTE3a5SUCWiQyVtEgxejL5Wj"));
         } catch (Exception e) {
             System.out.println("error: " + e);
         }
@@ -568,15 +583,11 @@ Get solid account info by address.
 
 *1. address(String)**  
 
-address, default hexString.  
+> address, default hexString.  
 
 **RETURN**  
 
-Account object.  
-
-**THROWS**  
-
-IllegalException, if the parameters are not correct.  
+Account object.   
 
 **EXAMPLE** 
  
@@ -626,7 +637,7 @@ Get transaction receipt info from a transaction id, must be in solid block.
 
 *1. txID(String)** 
 
-Transaction hash, i.e. transaction id.  
+> Transaction hash, i.e. transaction id.  
 
 **RETURN**  
 
@@ -634,7 +645,7 @@ Transaction object.
 
 **THROWS**  
 
-IllegalException, if the parameters are not correct.  
+IllegalException, if the parameters are not correct(e.g. the specified transaction has not been solidified).  
 
 **EXAMPLE** 
  
@@ -658,7 +669,7 @@ Get the rewards that the voter has not received.
 
 *1. address(String)**  
 
-address, default hexString.  
+> address, default hexString.  
 
 **RETURN**  
 
@@ -671,7 +682,7 @@ public void getRewardSolidity(){
         System.out.println("============= getRewardSolidity =============");
         TronClient client = TronClient.ofShasta("3333333333333333333333333333333333333333333333333333333333333333");
         try {
-            System.out.println(client.getRewardSolidity("TNSdGcMvSDwksounpkN1ZCmA7V5QLEDtWu"));
+            System.out.println(client.getRewardSolidity("TKryTFSUB2UY8jMVc3Rz3ofiUPrnR6pRAs"));
         } catch (Exception e) {
             System.out.println("error: " + e);
         }

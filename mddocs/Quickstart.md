@@ -1,5 +1,9 @@
 # Quickstart
 
+Tronj is compiled by `jdk13.0.2+8`. From version 0.1.1, it's compitable with `jdk8`.
+
+The latest version is **0.1.3**.
+
 ## Installation
 
 ### Gradle Setting
@@ -16,14 +20,14 @@ repositories {
 
 Add java and application plugins:
 
-```java
+```groovy
 plugins {
     id 'java'
     id 'application'
 }
 ```
 
-Add required libraries as dependencies. You may change the version to your preferred one.
+Add required libraries as dependencies. 
 
 ```groovy
 dependencies {
@@ -42,7 +46,7 @@ dependencies {
 
 ### Maven Setting
 
-Use maven repo setting from Bintray.
+Use maven repo setting from Bintray. The latest version is **0.1.3**.
 
 ```xml
 <dependency>
@@ -56,6 +60,8 @@ Use maven repo setting from Bintray.
 ## Using Tronj
 
 ### Choose net from **main net**, **shasta** or **nile**
+
+**Note**: Binding a private key is mainly for signing required operations. Any hex String conforming to the private key format can be put here if you only queries are needed.
 
 ```java
 TronClient client = Tronclient.ofMainnet("your private key");

@@ -10,7 +10,7 @@ Simply, a *const call* returns result immediately once and no need to sign or br
 
 *Trigger call* is a type of system contract call, needs signing and broadcasting. It fetches the result through the API.
 
-### Const call
+### Constant call
 
 ```java
 public void getSmartContract() {
@@ -27,8 +27,11 @@ public void getSmartContract() {
             System.out.println("error: " + e);
         }
     }
+```
 
-//Result
+The result is:
+
+```shell
 Contract name: JST
 Contract functions: 26
 # function name() view returns (string )
@@ -67,17 +70,17 @@ You can easily set `feeLimit`, `memo` and other common attributes via the `Trans
 
 ```java
 public void triggerCallDemo() {
-        TronClient client = TronClient.ofNile("3333333333333333333333333333333333333333333333333333333333333333");
+        TronClient client = TronClient.ofNile("your private key");
         try {
             //function 'transfer'
             //params: function name, function params
             Function trc20Transfer = new Function("transfer",
-            Arrays.asList(new Address("TVjsyZ7fYF3qLF6BQgPmTEZy1xrNNyVAAA"),
+            Arrays.asList(new Address("to address"),
                 new Uint256(BigInteger.valueOf(10L).multiply(BigInteger.valueOf(10).pow(18)))),
             Arrays.asList(new TypeReference<Bool>() {}));
 
             //the params are: owner address, contract address, function
-            TransactionBuilder builder = client.triggerCall("TJRabPrwbZy45sbavfcjinPJC18kjpRTv8", "TF17BgPaZYbz8oxbjhriubPDsA7ArKoLX3", trc20Transfer); //JST
+            TransactionBuilder builder = client.triggerCall("owner address", "contract address", trc20Transfer); //JST
             //set extra params
             builder.setFeeLimit(100000000L);
             builder.setMemo("Let's go!");
@@ -141,7 +144,7 @@ Throws if the function does not match any in the smart contract.
 
 ### triggerCall
 
-Make a trigger call. Trigger calls require signature and broadcasting. Refer to [RPC APIs](RPC APIs.md) for the signing and broadcasting functions.
+Make a trigger call. Trigger calls require signature and broadcasting. Refer to [RPC_APIs](RPC_APIs.md) for the signing and broadcasting functions.
 
 **PARAMS**
 
