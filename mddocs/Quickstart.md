@@ -34,9 +34,9 @@ dependencies {
     // protobuf & grpc
     implementation 'com.google.protobuf:protobuf-java:3.11.0'
 
-    implementation 'org.tron.tronj:abi:0.1.1'
-    implementation 'org.tron.tronj:client:0.1.1'
-    implementation 'org.tron.tronj:utils:0.1.1'
+    implementation 'org.tron.tronj:abi:0.1.3'
+    implementation 'org.tron.tronj:client:0.1.3'
+    implementation 'org.tron.tronj:utils:0.1.3'
 
     implementation 'com.google.guava:guava:28.0-jre'
 }
@@ -52,7 +52,7 @@ Use maven repo setting from Bintray. The latest version is **0.1.3**.
 <dependency>
   <groupId>org.tron.tronj</groupId>
   <artifactId>abi</artifactId>
-  <version>0.1.1</version>
+  <version>0.1.3</version>
   <type>pom</type>
 </dependency>
 ```
