@@ -10,7 +10,7 @@ Simply, a *const call* returns result immediately once and no need to sign or br
 
 *Trigger call* is a type of system contract call, needs signing and broadcasting. It fetches the result through the API.
 
-### Const call
+### Constant call
 
 ```java
 public void getSmartContract() {
