@@ -2,6 +2,8 @@
 
 Tronj is compiled by `jdk13.0.2+8`. From version 0.1.1, it's compitable with `jdk8`.
 
+The latest version is **0.1.2**.
+
 ## Installation
 
 ### Gradle Setting
