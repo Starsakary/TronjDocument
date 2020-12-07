@@ -2,7 +2,7 @@
 
 Tronj is compiled by `jdk13.0.2+8`. From version 0.1.1, it's compitable with `jdk8`.
 
-The latest version is **0.1.2**.
+The latest version is **0.1.3**.
 
 ## Installation
 
@@ -27,7 +27,7 @@ plugins {
 }
 ```
 
-Add required libraries as dependencies. You may change the version to your preferred one.
+Add required libraries as dependencies. 
 
 ```groovy
 dependencies {
@@ -46,7 +46,7 @@ dependencies {
 
 ### Maven Setting
 
-Use maven repo setting from Bintray. The latest version is **0.1.2**.
+Use maven repo setting from Bintray. The latest version is **0.1.3**.
 
 ```xml
 <dependency>
