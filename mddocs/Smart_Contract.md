@@ -70,17 +70,17 @@ You can easily set `feeLimit`, `memo` and other common attributes via the `Trans
 
 ```java
 public void triggerCallDemo() {
-        TronClient client = TronClient.ofNile("3333333333333333333333333333333333333333333333333333333333333333");
+        TronClient client = TronClient.ofNile("your private key");
         try {
             //function 'transfer'
             //params: function name, function params
             Function trc20Transfer = new Function("transfer",
-            Arrays.asList(new Address("TVjsyZ7fYF3qLF6BQgPmTEZy1xrNNyVAAA"),
+            Arrays.asList(new Address("to address"),
                 new Uint256(BigInteger.valueOf(10L).multiply(BigInteger.valueOf(10).pow(18)))),
             Arrays.asList(new TypeReference<Bool>() {}));
 
             //the params are: owner address, contract address, function
-            TransactionBuilder builder = client.triggerCall("TJRabPrwbZy45sbavfcjinPJC18kjpRTv8", "TF17BgPaZYbz8oxbjhriubPDsA7ArKoLX3", trc20Transfer); //JST
+            TransactionBuilder builder = client.triggerCall("owner address", "contract address", trc20Transfer); //JST
             //set extra params
             builder.setFeeLimit(100000000L);
             builder.setMemo("Let's go!");
