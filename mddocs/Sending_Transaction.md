@@ -15,9 +15,13 @@ Tronj defines the same protobufs include all RPC APIs and transaction related cl
 ```java
 public void sendTrx() {
         System.out.println("============= TRC transfer =============");
-        TronClient client = TronClient.ofNile("3333333333333333333333333333333333333333333333333333333333333333");
+        TronClient client = TronClient.ofNile("your privateKey");
         try {
-            client.transfer("TJRabPrwbZy45sbavfcjinPJC18kjpRTv8", "TVjsyZ7fYF3qLF6BQgPmTEZy1xrNNyVAAA", 2_000_000);
+            TransactionExtention transactionExtention = client.transfer("owner address", "to address", 1_000_000);
+            Transaction signedTxn = client.signTransaction(transactionExtention);
+            System.out.println(signedTxn.toString());
+            TransactionReturn ret = client.broadcastTransaction(signedTxn);
+            System.out.println("======== Result ========\n" + ret.toString());
         } catch (Exception e) {
             System.out.println("error: " + e);
         }
@@ -27,8 +31,7 @@ public void sendTrx() {
 In Tronj, the routine is:
 
 1. Create a `TronClient` object with your private key.
-2. According to the function create a contract defined in the protobuf.
-3. User `TransactionBuilder ` to set memo, fee limit, Etc.
-4. Call `TronClient.signTransaction()`to sign the transaction with your private key binding with the `TronClient` object.
-5. Call `TronClient.broadcastTransaction()` to broadcast the transaction and get a `TransactionReturn` for analysis.
+2. Obtain a `TransactionExtention` object from `TronClient.transfer()`.
+3. Call `TronClient.signTransaction()`to sign the transaction with your private key binding with the `TronClient` object.
+4. Call `TronClient.broadcastTransaction()` to broadcast the transaction and get a `TransactionReturn` for analysis.
 

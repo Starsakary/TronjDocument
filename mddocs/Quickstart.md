@@ -1,5 +1,9 @@
 # Quickstart
 
+Tronj is compiled by `jdk13.0.2+8`. 
+
+The latest version is **0.1.0**.
+
 ## Installation
 
 ### Gradle Setting
@@ -9,21 +13,21 @@ Add repo setting:
 ```groovy
 repositories {
     maven {
-        url  "https://dl.bintray.com/starsakary/tronj"
+        url  "https://dl.bintray.com/tronj/tronj"
     }
 }
 ```
 
 Add java and application plugins:
 
-```java
+```groovy
 plugins {
     id 'java'
     id 'application'
 }
 ```
 
-Add required libraries as dependencies. You may change the version to your preferred one.
+Add required libraries as dependencies. 
 
 ```groovy
 dependencies {
@@ -42,7 +46,7 @@ dependencies {
 
 ### Maven Setting
 
-Use maven repo setting from Bintray.
+Use maven repo setting from Bintray. The latest version is **0.1.0**.
 
 ```xml
 <dependency>
@@ -57,10 +61,12 @@ Use maven repo setting from Bintray.
 
 ### Choose net from **main net**, **shasta** or **nile**
 
+**Note**: Binding a private key is mainly for signing required operations. Any hex String conforming to the private key format can be put here if you only queries are needed.
+
 ```java
-TronClient client = ofMainnet("your private key");
-// TronClient client = ofShasta("your private key");
-// TronClient client = ofNile("your private key");
+TronClient client = Tronclient.ofMainnet("your private key");
+// TronClient client = Tronclient.ofShasta("your private key");
+// TronClient client = Tronclient.ofNile("your private key");
 ```
 
 ### With private net
@@ -68,7 +74,7 @@ TronClient client = ofMainnet("your private key");
 If using a private net, you may use another constructor: `TronClient(String grpcEndpoint, String grpcEndpointSolidity, String hexPrivateKey)`
 
 ```java
-TronClient client = new TronClient("127.0.0.1:50051", "127.0.0.1:50052", "your private key");
+TronClient client = new TronClient("grpc endpoint", "solidity grpc endpoint", "your private key");
 ```
 
 Aftre binding your private key with the `TronClient` object, your are ready to build, sign and broadcast your transactions.
