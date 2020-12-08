@@ -381,7 +381,7 @@ Get some latest blocks.
 
 *1. num(long)**  
 
-> Number of latest blocks.  
+> Number of latest blocks. It must be between 1 and 99.    
 
 **RETURN**  
 
@@ -389,7 +389,7 @@ BlockListExtention object.
 
 **THROWS**  
 
-IllegalException, if the parameters are not correct.  
+IllegalException, if the parameter is not between 1 and 99.  
 
 **EXAMPLE** 
  
