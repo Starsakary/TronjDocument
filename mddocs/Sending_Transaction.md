@@ -17,7 +17,7 @@ public void sendTrx() {
         System.out.println("============= TRC transfer =============");
         TronClient client = TronClient.ofNile("your privateKey");
         try {
-            TransactionExtention transactionExtention = client.transfer("owner address", "TP8LKAf3R3FHDAcrQXuwBEWmaGrrUdRvzb", 1_000_000);
+            TransactionExtention transactionExtention = client.transfer("owner address", "to address", 1_000_000);
             Transaction signedTxn = client.signTransaction(transactionExtention);
             System.out.println(signedTxn.toString());
             TransactionReturn ret = client.broadcastTransaction(signedTxn);
