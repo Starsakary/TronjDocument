@@ -31,8 +31,7 @@ public void sendTrx() {
 In Tronj, the routine is:
 
 1. Create a `TronClient` object with your private key.
-2. According to the function create a contract defined in the protobuf.
-3. User `TransactionBuilder ` to set memo, fee limit, Etc.
-4. Call `TronClient.signTransaction()`to sign the transaction with your private key binding with the `TronClient` object.
-5. Call `TronClient.broadcastTransaction()` to broadcast the transaction and get a `TransactionReturn` for analysis.
+2. Obtain a `TransactionExtention` object from `TronClient.transfer()`.
+3. Call `TronClient.signTransaction()`to sign the transaction with your private key binding with the `TronClient` object.
+4. Call `TronClient.broadcastTransaction()` to broadcast the transaction and get a `TransactionReturn` for analysis.
 
