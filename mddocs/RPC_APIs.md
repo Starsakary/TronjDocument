@@ -314,6 +314,88 @@ public void voteWitness(){
     }
 ```
 
+### createAccount 
+
+Create an account. Uses an already activated account to create a new account
+
+**PARAMS**  
+
+*1. ownerAddress(String)**  
+
+> owner address, an activated account, default hexString.  
+
+*2. accountAddress(String)**  
+
+> account address, the address of the new account, default hexString.  
+
+**RETURN**  
+
+TransactionExtention, including execution results.  
+
+**THROWS**  
+
+IllegalException, if fail to create account.  
+
+**EXAMPLE** 
+ 
+```java
+public void createAccount(){
+        System.out.println("============= createAccount =============");
+        TronClient client = TronClient.ofNile("your privateKey");
+        try {
+            TransactionExtention transaction = client.createAccount("owner address","account address");
+            System.out.println(transaction);
+            Transaction signedTxn = client.signTransaction(transaction);
+            System.out.println(signedTxn.toString());
+            TransactionReturn ret = client.broadcastTransaction(signedTxn);
+            System.out.println("======== Result ========\n" + ret.toString());
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+```
+
+### updateAccount 
+
+Modify account name, you can update it only if the name is empty
+
+**PARAMS**  
+
+*1. address(String)**  
+
+> owner address, default hexString.  
+
+*2. accountName(String)**  
+
+> the name of the account.  
+
+**RETURN**  
+
+TransactionExtention, including execution results.  
+
+**THROWS**  
+
+IllegalException, if fail to update account name.  
+
+**EXAMPLE** 
+ 
+```java
+public void updateAccount(){
+        System.out.println("============= updateAccount =============");
+        TronClient client = TronClient.ofNile("your privateKey");
+        try {
+            TransactionExtention transaction = client.updateAccount("owner address","updatename");
+            System.out.println(transaction);
+            Transaction signedTxn = client.signTransaction(transaction);
+            System.out.println(signedTxn.toString());
+            TransactionReturn ret = client.broadcastTransaction(signedTxn);
+            System.out.println("======== Result ========\n" + ret.toString());
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+```
+
 ### getNowBlock
 
 Query the latest block information. 
@@ -400,6 +482,69 @@ public void getBlockByLatestNum() {
         try {
             BlockListExtention blockListExtention = client.getBlockByLatestNum(10);
             System.out.println(blockListExtention);
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+```
+
+### getBlockByLimitNext 
+
+Returns the list of Block Objects included in the 'Block Height' range specified.  
+
+**PARAMS**  
+
+*1. startNum(long)**  
+
+> Number of start block height, including this block.    
+
+*2. endNum(long)**  
+
+> Number of end block height, excluding this block
+
+**RETURN**  
+
+BlockListExtention object.  
+
+**THROWS**  
+
+IllegalException, if the parameters are not correct.  
+
+**EXAMPLE** 
+ 
+```java
+public void getBlockByLimitNext() {
+        System.out.println("============= getBlockByLimitNext =============");
+        TronClient client = TronClient.ofNile("3333333333333333333333333333333333333333333333333333333333333333");
+        try {
+            BlockListExtention blockListExtention = client.getBlockByLimitNext(0,10);
+            System.out.println(blockListExtention);
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+```
+
+### getChainParameters
+
+All parameters that the blockchain committee can set.  
+
+**RETURN**  
+
+ChainParameters object.  
+
+**THROWS**  
+
+IllegalException, if fail to get chain parameters.  
+
+**EXAMPLE** 
+ 
+```java
+public void getChainParameters() {
+        System.out.println("============= getChainParameters =============");
+        TronClient client = TronClient.ofNile("3333333333333333333333333333333333333333333333333333333333333333");
+        try {
+            System.out.println(client.getChainParameters());
         } catch (Exception e) {
             System.out.println("error: " + e);
         }
@@ -523,6 +668,38 @@ public void getTransactionInfoById() {
     }
 ```
 
+### getTransactionById 
+
+Query transaction information by transaction id.
+
+**PARAMS**  
+
+*1. txID(String)**  
+
+> Transaction hash, i.e. transaction id.  
+
+**RETURN**  
+
+Transaction object.  
+
+**THROWS**  
+
+IllegalException, if the parameters are not correct.  
+
+**EXAMPLE** 
+ 
+```java
+public void getTransactionById() {
+        System.out.println("============= getTransactionById =============");
+        TronClient client = TronClient.ofNile("3333333333333333333333333333333333333333333333333333333333333333");
+        try {
+            System.out.println(client.getTransactionById("786c7516df88941e33ea44f03e637bd8c1ddcfd058634574102c6e3cfb93de0d"));
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+```
+
 ### getAccount 
 
 Get account info by address.  
@@ -550,6 +727,286 @@ public void getAccount(){
         }
     }
 ```
+
+### getAccountResource 
+
+Query the resource information of an account(bandwidth,energy,etc).  
+
+**PARAMS**  
+
+*1. address(String)**  
+
+> address, default hexString.
+
+**RETURN**  
+
+AccountResourceMessage object.    
+
+**EXAMPLE** 
+ 
+```java
+public void getAccountResource(){
+        System.out.println("============= getAccountResource =============");
+        TronClient client = TronClient.ofShasta("3333333333333333333333333333333333333333333333333333333333333333");
+        try {
+            System.out.println(client.getAccountResource("TKwVM5tsELuTE3a5SUCWiQyVtEgxejL5Wj"));
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+```
+
+### getAccountNet 
+
+Query bandwidth information.  
+
+**PARAMS**  
+
+*1. address(String)**  
+
+> address, default hexString.
+
+**RETURN**  
+
+AccountResourceMessage object.    
+
+**EXAMPLE** 
+ 
+```java
+public void getAccountNet(){
+        System.out.println("============= getAccountNet =============");
+        TronClient client = TronClient.ofShasta("3333333333333333333333333333333333333333333333333333333333333333");
+        try {
+            System.out.println(client.getAccountNet("TKwVM5tsELuTE3a5SUCWiQyVtEgxejL5Wj"));
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+```
+
+### getAssetIssueList 
+
+Query the list of all the TRC10 tokens.  
+
+**RETURN**  
+
+AssetIssueList object.    
+
+**EXAMPLE** 
+ 
+```java
+public void getAssetIssueList() {
+        System.out.println("============= getAssetIssueList =============");
+        TronClient client = TronClient.ofNile("3333333333333333333333333333333333333333333333333333333333333333");
+        try {
+            System.out.println(client.getAssetIssueList());
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+```
+
+### getAssetIssueByAccount 
+
+Query the TRC10 token information issued by an account.  
+
+**PARAMS**  
+
+*1. address(String)**  
+
+> address, the Token Issuer account address, default hexString.
+
+**RETURN**  
+
+AssetIssueList object.    
+
+**EXAMPLE** 
+ 
+```java
+public void getAssetIssueByAccount() {
+        System.out.println("============= getAssetIssueByAccount =============");
+        TronClient client = TronClient.ofNile("3333333333333333333333333333333333333333333333333333333333333333");
+        try {
+            System.out.println(client.getAssetIssueByAccount("TMX73eFtUtyZXg62uCnjSywDu7pD5sau48"));
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+```
+
+### getAssetIssueById 
+
+Query a token by token id.  
+
+**PARAMS**  
+
+*1. assetId(String)**  
+
+> the ID of the TRC10 token.
+
+**RETURN**  
+
+AssetIssueContract object.    
+
+**EXAMPLE** 
+ 
+```java
+public void getAssetIssueById() {
+        System.out.println("============= getAssetIssueById =============");
+        TronClient client = TronClient.ofNile("3333333333333333333333333333333333333333333333333333333333333333");
+        try {
+            System.out.println(client.getAssetIssueById("1000134"));
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+```  
+
+### getExchangeById 
+
+Query exchange pair based on id.  
+
+**PARAMS**  
+
+*1. id(String)**  
+
+> transaction pair id.
+
+**RETURN**  
+
+Exchange object.    
+
+**THROWS**  
+
+IllegalException, if fail to get exchange pair. 
+
+**EXAMPLE** 
+ 
+```java
+public void getExchangeById() {
+        System.out.println("============= getExchangeById =============");
+        TronClient client = TronClient.ofMainnet("3333333333333333333333333333333333333333333333333333333333333333");
+        try {
+            System.out.println(client.getExchangeById("10"));
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+``` 
+
+### listExchanges 
+
+List all exchange pairs.  
+
+**RETURN**  
+
+ExchangeList object.  
+
+**EXAMPLE** 
+ 
+```java
+public void listExchanges(){
+        System.out.println("============= listExchanges =============");
+        TronClient client = TronClient.ofNile("3333333333333333333333333333333333333333333333333333333333333333");
+        try {
+            System.out.println(client.listExchanges());
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+``` 
+
+### getProposalById 
+
+Query proposal based on ID.  
+
+**PARAMS**  
+
+*1. id(String)**  
+
+> proposal id.
+
+**RETURN**  
+
+Proposal object.    
+
+**THROWS**  
+
+IllegalException, if fail to get proposal. 
+
+**EXAMPLE** 
+ 
+```java
+public void getProposalById() {
+        System.out.println("============= getProposalById =============");
+        TronClient client = TronClient.ofMainnet("3333333333333333333333333333333333333333333333333333333333333333");
+        try {
+            System.out.println(client.getProposalById("15"));
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+``` 
+
+### getDelegatedResourceAccountIndex 
+
+Query the energy delegation by an account. i.e. list all addresses that have delegated resources to an account 
+
+**PARAMS**  
+
+*1. address(String)**  
+
+> address, default hexString.
+
+**RETURN**  
+
+DelegatedResourceAccountIndex object.     
+
+**EXAMPLE** 
+ 
+```java
+public void getDelegatedResourceAccountIndex(){
+        System.out.println("============= getDelegatedResourceAccountIndex =============");
+        TronClient client = TronClient.ofMainnet("3333333333333333333333333333333333333333333333333333333333333333");
+        try {
+            System.out.println(client.getDelegatedResourceAccountIndex("TLyqzVGLV1srkB7dToTAEqgDSfPtXRJZYH"));
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+``` 
+
+### getPaginatedAssetIssueList 
+
+Query the list of all the tokens by pagination.
+
+**PARAMS**  
+
+*1. offset(long)**  
+
+> the index of the start token.
+
+*2. limit(long)**  
+
+> the amount of tokens per page.
+
+**RETURN**  
+
+AssetIssueList object.     
+
+**EXAMPLE** 
+ 
+```java
+public void getPaginatedAssetIssueList() {
+        System.out.println("============= getPaginatedAssetIssueList =============");
+        TronClient client = TronClient.ofNile("3333333333333333333333333333333333333333333333333333333333333333");
+        try {
+            System.out.println(client.getPaginatedAssetIssueList(0,20));
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+``` 
 
 ### listWitnesses 
 
