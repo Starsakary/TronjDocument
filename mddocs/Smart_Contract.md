@@ -170,5 +170,316 @@ A TransactionBuilder object, for easily setting memos, feelimit, Etc.
 
 Throws if the function does not match any in the smart contract.
 
+## TRC-20 
+
+[TRC-20](https://github.com/tronprotocol/TIPs/blob/master/tip-20.md) is a standard interface for tokens, which has a set of standard functions.
+
+Tronj implements the standard function calls defined in TIP-20.
+
+Before you call the functions, a `TronClient` object should be initialized.
+
+```java
+TronClient c = TronClient.ofNile("Private key");
+```
+
+**NOTE: The `Trc20Contract` can be only created by a TRC-20 contract, or there will be errors while calling functions.**
+
+### function name()
+
+Returns the name of the token - e.g. `"MyToken"`.
+
+**RETURN**
+
+The token name as a `String`.
+
+**EXAMPLE**
+
+```java
+public void getName() {
+        Contract cntr = c.getContract("Contract address");
+  //init a Trc20Contract object
+  //params: contract, caller's address, TronClient
+        Trc20Contract token = new Trc20Contract(cntr, "Caller address", c);
+        try {
+            System.out.println("Name: " + token.name());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+```
+
+
+
+### function symbol()
+
+Returns the symbol of the token. E.g. `"HIX"`.
+
+**RETURN**
+
+The token symbol as a `String`.
+
+**EXAMPLE**
+
+```java
+public void getSymbol() {
+        Contract cntr = c.getContract("Contract address");
+        Trc20Contract token = new Trc20Contract(cntr, "Caller address", c);
+        try {
+            System.out.println("Symbol: " + token.symbol());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+```
+
+
+
+
+
+### function decimals()
+
+Returns the number of decimals the token uses - e.g. `8`, means to divide the token amount by `100000000` to get its user representation.
+
+**RETURN**
+
+The token's decimals as a `Biginteger`.
+
+**EXAMPLE**
+
+```java
+public void getDecimals() {
+        Contract cntr = c.getContract("Contract address");
+        Trc20Contract token = new Trc20Contract(cntr, "Caller address", c);
+        try {
+            System.out.println("Decimals: " + token.decimals());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+```
+
+
+
+### function totalSupply()
+
+Returns the total token supply.
+
+**RETURN**
+
+The total supply of the token as a `Biginteger`.
+
+**EXAMPLE**
+
+```java
+public void getTotalSupply() {
+        Contract cntr = c.getContract("Contract address");
+        Trc20Contract token = new Trc20Contract(cntr, "Caller address", c);
+        try {
+            System.out.println("Total Supply: " + token.totalSupply());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+```
+
+
+
+### function balanceOf(address _owner)
+
+Returns the account balance of another account with address `_owner`.
+
+**PARAMS**
+
+*1.  owner address*
+
+The address of a token holder.
+
+**RETURN**
+
+The balance in a `Biginteger`.
+
+**EXAMPLE**
+
+```java
+public void getBalanceOf() {
+        Contract cntr = c.getContract("Contract address");
+        Trc20Contract token = new Trc20Contract(cntr, "Caller address", c);
+        try {
+            System.out.println("Balance: " + token.balanceOf("Owner address"));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+```
+
+
+
+### function transfer(address _to, uint256 _value)
+
+Transfers `_value` amount of tokens to address `_to`, and MUST fire the `Transfer` event.
+
+**PARAMS**
+
+*1. destAddr*
+
+The receiver's address. 
+
+*2. amount*
+
+The transfer amount.
+
+*3. memo*
+
+The transaction memo.
+
+*4. feeLimit*
+
+The feelimit of a trigger call.
+
+**RETURN**
+
+A `TransactionReturn` object to show the transaction result.
+
+**EXAMPLE**
+
+```java
+public void transfer() {
+        Contract cntr = c.getContract("Contract address");
+        Trc20Contract token = new Trc20Contract(cntr, "Caller address", c);
+        try {
+            // destnation address, amount, memo, feelimit
+            System.out.println(token.transfer("To address", 10L, "go!", 100000000L));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+```
+
+
+
+### function transferFrom(address _from, address _to, uint256 _value)
+
+Transfers `_value` amount of tokens from address `_from` to address `_to`, and MUST fire the `Transfer` event.
+
+Normally works for withdraw workflow.
+
+**PARAMS**
+
+*1. fromAddr*
+
+The address to withdraw from.
+
+*2. destAddr*
+
+The receiver's address. 
+
+*3. amount*
+
+The transfer amount.
+
+*4. memo*
+
+The transaction memo.
+
+*5. feeLimit*
+
+The feelimit of a trigger call.
+
+**RETURN**
+
+A `TransactionReturn` object to show the transaction result.
+
+**EXAMPLE**
+
+```java
+public void transferFrom() {
+        Contract cntr = c.getContract("Contract address");
+        Trc20Contract token = new Trc20Contract(cntr, "Caller address", c);
+        try {
+            // destnation address, amount, memo, feelimit
+            System.out.println(token.transferFrom("From Address", "To address", 10L, "go!", 100000000L));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+```
+
+
+
+### function approve(address _spender, uint256 _value)
+
+Allows `_spender` to withdraw from your account multiple times, up to the `_value` amount. If this function is called again it overwrites the current allowance with `_value`.
+
+**PARAMS**
+
+*1. spender*
+
+The spender's(withdrawer's) address.
+
+*2. amount*
+
+The allowance amount.
+
+*3. memo*
+
+The transaction memo.
+
+*4. feeLimit*
+
+The feelimit of a trigger call.
+
+**RETURN**
+
+A `TransactionReturn` object to show the transaction result.
+
+**EXAMPLE**
+
+```java
+public void approve() {
+        Contract cntr = c.getContract("Contract address");
+        Trc20Contract token = new Trc20Contract(cntr, "Caller address", c);
+        try {
+            // destnation address, amount, memo, feelimit
+            System.out.println(token.approve("Spender", 10L, "go!", 100000000L));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+```
+
+
+
+### function allowance(address _owner, address _spender)
+
+Returns the amount which `_spender` is still allowed to withdraw from `_owner`.
+
+**PARAMS**
+
+*1. owner*
+
+The owner's address.
+
+*2. spender*
+
+The spender's address.
+
+**RETURN**
+
+The approved withdrawal amount in a `Biginteger`.
+
+**EXAMPLE**
+
+```java
+public void getAllowance() {
+        Contract cntr = c.getContract("Contract address");
+        Trc20Contract token = new Trc20Contract(cntr, "Caller address", c);
+        try {
+            System.out.println("Allowance: " + token.allowance("From address", "Spender"));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+```
+
 
 
