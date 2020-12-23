@@ -2,7 +2,15 @@
 
 This chapter describes the specific definitions, parameters, return values and exception handling of the RPC APIs.
 
-## Full Node APIs   
+## Full Node APIs  
+
+**Note** 
+
+If there is 'Byte' address to be converted in the return result of the following API, you can use the following demo:  
+
+```java
+Base58Check.bytesToBase58(client.parseAddress(client.toHex(byteAddress)).toByteArray())
+```   
 
 ### signTransaction(TransactionExtention)
 
@@ -1008,7 +1016,84 @@ public void listWitnesses(){
             System.out.println("error: " + e);
         }
     }
-```  
+```   
+
+### getDelegatedResourceAccountIndex 
+
+Query the energy delegation by an account. i.e. list all addresses that have delegated resources to an account 
+
+**PARAMS**  
+
+*1. address(String)**  
+
+> address, default hexString.
+
+**RETURN**  
+
+DelegatedResourceAccountIndex object.     
+
+**EXAMPLE** 
+ 
+```java
+public void getDelegatedResourceAccountIndex(){
+        System.out.println("============= getDelegatedResourceAccountIndex =============");
+        TronClient client = TronClient.ofNile("3333333333333333333333333333333333333333333333333333333333333333");
+        try {
+            DelegatedResourceAccountIndex accountIndex = client.getDelegatedResourceAccountIndex("TLtrDb1udekjDumnrf3EVeke3Q6pHkZxjm");
+            ByteString account = accountIndex.getAccount();
+
+            System.out.println("Accounts: "+Base58Check.bytesToBase58(client.parseAddress(client.toHex(account)).toByteArray()));
+
+            int fromAccountsCount = accountIndex.getFromAccountsCount();
+            for(int i =0;i<fromAccountsCount;i++){
+                ByteString fromAccounts = accountIndex.getFromAccounts(i);
+                System.out.println("fromAccounts: "+Base58Check.bytesToBase58(client.parseAddress(client.toHex(fromAccounts)).toByteArray()));
+            }
+
+            int toAccountsCount = accountIndex.getToAccountsCount();
+            for(int i =0;i<toAccountsCount;i++){
+                ByteString toAccounts = accountIndex.getToAccounts(i);
+                System.out.println("toAccounts: "+Base58Check.bytesToBase58(client.parseAddress(client.toHex(toAccounts)).toByteArray()));
+            }
+
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+```   
+
+### getDelegatedResource 
+
+Returns all resources delegations from an account to another account. The fromAddress can be retrieved from the GetDelegatedResourceAccountIndex API 
+
+**PARAMS**  
+
+*1. fromAddress(String)**  
+
+> energy from address,, default hexString.  
+
+*2. toAddress(String)**  
+
+> energy delegation information, default hexString.
+
+**RETURN**  
+
+DelegatedResourceList object.     
+
+**EXAMPLE** 
+ 
+```java
+public void getDelegatedResource(){
+        System.out.println("============= getDelegatedResource =============");
+        TronClient client = TronClient.ofNile("3333333333333333333333333333333333333333333333333333333333333333");
+        try {
+
+            System.out.println(client.getDelegatedResource("TLtrDb1udekjDumnrf3EVeke3Q6pHkZxjm","TMmbeRPnFhXC7BPLaF2M1HCsoE4jwZNB7b"));
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+```   
 
 ## Solidity Node APIs
 
