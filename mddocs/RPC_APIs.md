@@ -214,7 +214,7 @@ Freeze balance to get votes and energy or bandwidth, default for 3 days.
 
 *5. receiveAddress(String)*  
 
-> the address that will receive the resource, default hexString 
+> optional, the address that will receive the resource, default hexString 
 
 **RETURN**  
 
@@ -258,7 +258,7 @@ Unfreeze the frozen TRX.
 
 *3. receiveAddress(String)*  
 
-> the address that will receive the resource, default hexString 
+> optional, the address that will receive the resource, default hexString 
 
 **RETURN**  
 
