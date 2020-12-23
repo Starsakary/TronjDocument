@@ -202,7 +202,11 @@ Freeze balance to get votes and energy or bandwidth, default for 3 days.
 
 *4. resourceCode(int)**  
 
-> resource type, can be "ENERGY" or "BANDWIDTH"
+> resource type, can be "ENERGY" or "BANDWIDTH"  
+
+*5. receiveAddress(String)*  
+
+> the address that will receive the resource, default hexString 
 
 **RETURN**  
 
@@ -243,6 +247,10 @@ Unfreeze the frozen TRX.
 *2. resourceCode(int)**  
 
 > resource type, can be "ENERGY" or "BANDWIDTH"  
+
+*3. receiveAddress(String)*  
+
+> the address that will receive the resource, default hexString 
 
 **RETURN**  
 
@@ -942,34 +950,6 @@ public void getProposalById() {
         TronClient client = TronClient.ofMainnet("3333333333333333333333333333333333333333333333333333333333333333");
         try {
             System.out.println(client.getProposalById("15"));
-        } catch (Exception e) {
-            System.out.println("error: " + e);
-        }
-    }
-``` 
-
-### getDelegatedResourceAccountIndex 
-
-Query the energy delegation by an account. i.e. list all addresses that have delegated resources to an account 
-
-**PARAMS**  
-
-*1. address(String)**  
-
-> address, default hexString.
-
-**RETURN**  
-
-DelegatedResourceAccountIndex object.     
-
-**EXAMPLE** 
- 
-```java
-public void getDelegatedResourceAccountIndex(){
-        System.out.println("============= getDelegatedResourceAccountIndex =============");
-        TronClient client = TronClient.ofMainnet("3333333333333333333333333333333333333333333333333333333333333333");
-        try {
-            System.out.println(client.getDelegatedResourceAccountIndex("TLyqzVGLV1srkB7dToTAEqgDSfPtXRJZYH"));
         } catch (Exception e) {
             System.out.println("error: " + e);
         }
