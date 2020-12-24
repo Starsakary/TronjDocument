@@ -83,6 +83,18 @@ Aftre binding your private key with the `TronClient` object, your are ready to b
 
 Tronj is signed with PGP. Verifying the public key between the `.jar` and `.asc` files to ensure the packages are from us.
 
+### Verifying signature
+
+To verify the signature, run `brew install gnupg` to install `gnupg` on your device.
+
+From the [repository](https://dl.bintray.com/tronj/tronj/org/tron/tronj) download the .jar and the corresponding .asc file.
+
+Run `gpg --keyserver keyserver.ubuntu.com --recv-key AD0876A4` to get the public key.
+
+Taking the abi package as an example, run `gpg --verify abi-0.1.1.jar.asc abi-0.1.1.jar` to verify the signature.
+
+Alternatively, you may import the public from below.
+
 ```pgp
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 
