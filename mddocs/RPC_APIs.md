@@ -4,9 +4,9 @@ This chapter describes the specific definitions, parameters, return values and e
 
 ## Full Node APIs  
 
-**Note** 
+**Note**  
 
-If there is 'Byte' address to be converted in the return result of the following API, you can use the following demo:  
+To convert the raw result to a readable BASE58 address:
 
 ```java
 Base58Check.bytesToBase58(client.parseAddress(client.toHex(byteAddress)).toByteArray())
