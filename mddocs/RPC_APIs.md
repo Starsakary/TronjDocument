@@ -784,7 +784,7 @@ Query bandwidth information.
 
 **RETURN**  
 
-AccountResourceMessage object.    
+AccountNetMessage object.    
 
 **EXAMPLE** 
  
