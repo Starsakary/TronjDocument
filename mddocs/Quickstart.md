@@ -81,7 +81,7 @@ Aftre binding your private key with the `TronClient` object, your are ready to b
 
 ## Signature
 
-Tronj is signed with PGP. Verifying the public key to ensure the packages are from  us.
+Tronj is signed with PGP. Verifying the public key between the `.jar` and `.asc` files to ensure the packages are from us.
 
 ```pgp
 -----BEGIN PGP PUBLIC KEY BLOCK-----
