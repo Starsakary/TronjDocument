@@ -2,7 +2,7 @@
 
 Tronj is compiled by `jdk13.0.2+8`. 
 
-The latest version is **0.1.0**.
+The latest version is **0.1.1**.
 
 ## Installation
 
@@ -34,9 +34,9 @@ dependencies {
     // protobuf & grpc
     implementation 'com.google.protobuf:protobuf-java:3.11.0'
 
-    implementation 'org.tron.tronj:abi:0.1.0'
-    implementation 'org.tron.tronj:client:0.1.0'
-    implementation 'org.tron.tronj:utils:0.1.0'
+    implementation 'org.tron.tronj:abi:0.1.1'
+    implementation 'org.tron.tronj:client:0.1.1'
+    implementation 'org.tron.tronj:utils:0.1.1'
 
     implementation 'com.google.guava:guava:28.0-jre'
 }
@@ -46,13 +46,13 @@ dependencies {
 
 ### Maven Setting
 
-Use maven repo setting from Bintray. The latest version is **0.1.0**.
+Use maven repo setting from Bintray. The latest version is **0.1.1**.
 
 ```xml
 <dependency>
   <groupId>org.tron.tronj</groupId>
   <artifactId>abi</artifactId>
-  <version>0.1.0</version>
+  <version>0.1.1</version>
   <type>pom</type>
 </dependency>
 ```
@@ -81,7 +81,19 @@ Aftre binding your private key with the `TronClient` object, your are ready to b
 
 ## Signature
 
-Tronj is signed with PGP. Verifying the public key to ensure the packages are from  us.
+Tronj is signed with PGP. Verifying the public key between the `.jar` and `.asc` files to ensure the packages are from us.
+
+### Verifying signature
+
+To verify the signature, run `brew install gnupg` to install `gnupg` on your device.
+
+From the [repository](https://dl.bintray.com/tronj/tronj/org/tron/tronj) download the .jar and the corresponding .asc file.
+
+Run `gpg --keyserver keyserver.ubuntu.com --recv-key AD0876A4` to get the public key.
+
+Taking the abi package as an example, run `gpg --verify abi-0.1.1.jar.asc abi-0.1.1.jar` to verify the signature.
+
+Alternatively, you may import the public from below.
 
 ```pgp
 -----BEGIN PGP PUBLIC KEY BLOCK-----
