@@ -524,7 +524,7 @@ BlockListExtention object.
 
 **THROWS**  
 
-IllegalException, if the parameters are not correct.  
+IllegalException, if the parameters are not correct or the difference between startNum and endNum is greater than 100.  
 
 **EXAMPLE** 
  
