@@ -172,7 +172,7 @@ Throws if the function does not match any in the smart contract.
 
 ## TRC-20 
 
-[TRC-20](https://github.com/tronprotocol/TIPs/blob/master/tip-20.md) is a standard interface for tokens, which has a set of standard functions.
+[TRC-20](https://github.com/tronprotocol/TIPs/blob/master/tip-20.m%64) is a standard interface for tokens, which has a set of standard functions.
 
 Tronj implements the standard function calls defined in TIP-20.
 
