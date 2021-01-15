@@ -1087,7 +1087,6 @@ public void getDelegatedResource(){
         System.out.println("============= getDelegatedResource =============");
         TronClient client = TronClient.ofNile("3333333333333333333333333333333333333333333333333333333333333333");
         try {
-
             System.out.println(client.getDelegatedResource("TLtrDb1udekjDumnrf3EVeke3Q6pHkZxjm","TMmbeRPnFhXC7BPLaF2M1HCsoE4jwZNB7b"));
         } catch (Exception e) {
             System.out.println("error: " + e);
