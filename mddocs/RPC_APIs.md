@@ -1070,7 +1070,7 @@ Returns all resources delegations from an account to another account. The fromAd
 
 *1. fromAddress(String)**  
 
-> energy from address,, default hexString.  
+> energy from address, default hexString.  
 
 *2. toAddress(String)**  
 
@@ -1093,7 +1093,388 @@ public void getDelegatedResource(){
             System.out.println("error: " + e);
         }
     }
+```  
+
+### createAssetIssue 
+
+Issue a token 
+
+**PARAMS**  
+
+*1. ownerAddress(String)**  
+
+> Owner address, default hexString.  
+
+*2. name(String)**  
+
+> Token name, default hexString.  
+
+*3. abbr(String)**  
+
+> Token name abbreviation, default hexString.  
+
+*4. totalSupply(long)**  
+
+> Token total supply.  
+
+*5. trxNum(int)**  
+
+> Define the price by the ratio of trx_num/num.  
+
+*6. icoNum(int)**  
+
+> Define the price by the ratio of trx_num/num.  
+
+*7. startTime(long)**  
+
+> ICO start time.  
+
+*8. endTime(long)**  
+
+> ICO end time.  
+
+*9. url(String)**  
+
+> Token official website url, default hexString.  
+
+*10. freeAssetNetLimit(long)**  
+
+> Token free asset net limit.  
+
+*11. publicFreeAssetNetLimit(long)**  
+
+> Token public free asset net limit.  
+
+*12. precision(int)**    
+
+*13. fronzenAmount(long)**  
+
+> fronzen amount.  
+
+*14. frozenDay(long)**  
+
+> fronzen day.  
+
+*15. description(String)**  
+
+> Token description, default hexString.     
+
+**RETURN**  
+
+TransactionExtention object.  
+
+**THROWS**  
+
+IllegalException, if fail to create AssetIssue.     
+
+**EXAMPLE** 
+ 
+```java
+public void createAssetIssue() {
+        System.out.println("============= createAssetIssue =============");
+        TronClient client = TronClient.ofNile("your privateKey");
+        try {
+            long start = System.currentTimeMillis() + 2000;
+            long end = System.currentTimeMillis() + 1000000000;
+
+            TransactionExtention transaction = client.createAssetIssue("owner address","lsp1", "saf1",100000000L, 1, 1000,start,end,"7777772e6578616d706c652e636f6d",
+                    100000L,1L,6,1L,1L,"stest-assetissue");
+            System.out.println(transaction);
+            Transaction signedTxn = client.signTransaction(transaction);
+            System.out.println(signedTxn.toString());
+            TransactionReturn ret = client.broadcastTransaction(signedTxn);
+            System.out.println("======== Result ========\n" + ret.toString());
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+```  
+
+### participateAssetIssue 
+
+Participate a token 
+
+**PARAMS**  
+
+*1. toAddress(String)**  
+
+> the issuer address of the token, default hexString.  
+
+*2. ownerAddress(String)**  
+
+> the participant address, default hexString.  
+
+*3. assertName(String)**  
+
+> token id, default hexString.  
+
+*4. amount(long)**  
+
+> participate token amount.
+
+**RETURN**  
+
+TransactionExtention object.  
+
+**THROWS**  
+
+IllegalException, if fail to participate AssetIssue.      
+
+**EXAMPLE** 
+ 
+```java
+public void participateAssetIssue() {
+        System.out.println("============= participateAssetIssue =============");
+        TronClient client = TronClient.ofNile("your privateKey");
+        try {
+
+            TransactionExtention transaction = client.participateAssetIssue("toAddress","ownerAddress","1000204", 1L);
+            System.out.println(transaction);
+            Transaction signedTxn = client.signTransaction(transaction);
+            System.out.println(signedTxn.toString());
+            TransactionReturn ret = client.broadcastTransaction(signedTxn);
+            System.out.println("======== Result ========\n" + ret.toString());
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+```  
+
+### updateAsset 
+
+Update basic TRC10 token information 
+
+**PARAMS**  
+
+*1. ownerAddress(String)**  
+
+> owner address, default hexString.  
+
+*2. description(String)**  
+
+> the description of token, default hexString.  
+
+*3. url(String)**  
+
+> The token's website url, default hexString.  
+
+*4. newLimit(int)**  
+
+> each token holder's free bandwidth.  
+
+*5. newPublicLimit(int)**  
+
+> the total free bandwidth of the token.  
+
+**RETURN**  
+
+TransactionExtention object.  
+
+**THROWS**  
+
+IllegalException, if fail to update asset.      
+
+**EXAMPLE** 
+ 
+```java
+public void updateAsset() {
+        System.out.println("============= updateAsset =============");
+        TronClient client = TronClient.ofNile("your privateKey");
+        try {
+
+            TransactionExtention transaction = client.updateAsset("ownerAddress","newlsp","sadf", 1,2);
+            System.out.println(transaction);
+            Transaction signedTxn = client.signTransaction(transaction);
+            System.out.println(signedTxn.toString());
+            TransactionReturn ret = client.broadcastTransaction(signedTxn);
+            System.out.println("======== Result ========\n" + ret.toString());
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
 ```   
+
+### unfreezeAsset 
+
+Unfreeze a token that has passed the minimum freeze duration 
+
+**PARAMS**  
+
+*1. ownerAddress(String)**  
+
+> owner address, default hexString.      
+
+**RETURN**  
+
+TransactionExtention object.  
+
+**THROWS**  
+
+IllegalException, if fail to unfreeze asset.      
+
+**EXAMPLE** 
+ 
+```java
+public void unfreezeAsset() {
+        System.out.println("============= unfreezeAsset =============");
+        TronClient client = TronClient.ofNile("your privateKey");
+        try {
+
+            TransactionExtention transaction = client.unfreezeAsset("ownerAddress");
+            System.out.println(transaction);
+            Transaction signedTxn = client.signTransaction(transaction);
+            System.out.println(signedTxn.toString());
+            TransactionReturn ret = client.broadcastTransaction(signedTxn);
+            System.out.println("======== Result ========\n" + ret.toString());
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+```  
+   
+### getAssetIssueByAccount 
+
+Query the TRC10 token information issued by an account 
+
+**PARAMS**  
+
+*1. address(String)**  
+
+> the Token Issuer account address.      
+
+**RETURN**  
+
+AssetIssueList object.        
+
+**EXAMPLE** 
+ 
+```java
+public void getAssetIssueByAccount() {
+        System.out.println("============= getAssetIssueByAccount =============");
+        TronClient client = TronClient.ofNile("your privateKey");
+        try {
+            System.out.println(client.getAssetIssueByAccount("address"));
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+```  
+
+### getAssetIssueByName 
+
+Query a token by token name 
+
+**PARAMS**  
+
+*1. name(String)**  
+
+> the name of the TRC10 token.      
+
+**RETURN**  
+
+AssetIssueContract object.        
+
+**EXAMPLE** 
+ 
+```java
+public void getAssetIssueByName() {
+        System.out.println("============= getAssetIssueByName =============");
+        TronClient client = TronClient.ofNile("your privateKey");
+        try {
+            System.out.println(client.getAssetIssueByName("name"));
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+```  
+
+### getAssetIssueListByName 
+
+Query the list of all the TRC10 tokens by token name 
+
+**PARAMS**  
+
+*1. name(String)**  
+
+> the name of the TRC10 token.      
+
+**RETURN**  
+
+AssetIssueList object.        
+
+**EXAMPLE** 
+ 
+```java
+public void getAssetIssueListByName() {
+        System.out.println("============= getAssetIssueListByName =============");
+        TronClient client = TronClient.ofNile("your privateKey");
+        try {
+            System.out.println(client.getAssetIssueByName("name"));
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+```  
+ 
+### getTransactionSignWeight 
+
+Query transaction sign weight 
+
+**PARAMS**  
+
+*1. trx(Transaction)**  
+
+> transaction object.      
+
+**RETURN**  
+
+TransactionSignWeight object.        
+
+**EXAMPLE** 
+ 
+```java
+public void getTransactionSignWeight() {
+        System.out.println("============= getTransactionSignWeight =============");
+        TronClient client = TronClient.ofNile("3333333333333333333333333333333333333333333333333333333333333333");
+        try {
+
+            TransactionSignWeight transaction = client.getTransactionSignWeight(client.getTransactionById("786c7516df88941e33ea44f03e637bd8c1ddcfd058634574102c6e3cfb93de0d"));
+            System.out.println(transaction);
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+```  
+
+### getTransactionApprovedList 
+
+Query transaction approvedList 
+
+**PARAMS**  
+
+*1. trx(Transaction)**  
+
+> transaction object.      
+
+**RETURN**  
+
+TransactionApprovedList object.        
+
+**EXAMPLE** 
+ 
+```java
+public void getTransactionApprovedList() {
+        System.out.println("============= getTransactionApprovedList =============");
+        TronClient client = TronClient.ofNile("3333333333333333333333333333333333333333333333333333333333333333");
+        try {
+
+            TransactionApprovedList transaction = client.getTransactionApprovedList(client.getTransactionById("786c7516df88941e33ea44f03e637bd8c1ddcfd058634574102c6e3cfb93de0d"));
+            System.out.println(transaction);
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
+```
 
 ## Solidity Node APIs
 
