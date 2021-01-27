@@ -1473,6 +1473,78 @@ public void getTransactionApprovedList() {
             System.out.println("error: " + e);
         }
     }
+```  
+
+### accountPermissionUpdate 
+
+Update the account permission, includes the three privilege levels of owner, witness, and active privilege. 
+
+**PARAMS**  
+
+*1. contract(AccountPermissionUpdateContract)**  
+
+> AccountPermissionUpdateContract object.      
+
+**RETURN**  
+
+TransactionExtention object.  
+
+**THROWS**  
+
+IllegalException, if fail to update account permission.      
+
+**EXAMPLE** 
+ 
+```java
+public void accountPermissionUpdate(){
+        System.out.println("============= accountPermissionUpdate =============");
+        TronClient client = TronClient.ofNile("5bffa78c05e58d25e6d9fca69ece106678b5acdb558fd329972f0e860f27974f");
+        try {
+
+        AccountPermissionUpdateContract.Builder builder =
+                AccountPermissionUpdateContract.newBuilder();
+
+        Permission ownerPermission = null;
+        Permission.Builder builderOwner =
+                Permission.newBuilder();
+        builderOwner.setTypeValue(0);
+        builderOwner.setPermissionName("owner");
+        builderOwner.setThreshold(1);
+        Common.Key.Builder keyOwner =
+                Common.Key.newBuilder();
+        keyOwner.setAddress(client.parseAddress("4122ED62967ED0D2186B2FC639D7972D172A95C855"));
+        keyOwner.setWeight(1);
+        builderOwner.addKeys(keyOwner);
+        ownerPermission = builderOwner.build();
+
+        Permission activePermissions = null;
+        Permission.Builder builderActive =
+                Permission.newBuilder();
+        builderActive.setTypeValue(2);
+        builderActive.setThreshold(1);
+        builderActive.setPermissionName("active0");
+        builderActive.setOperations(client.parseAddress("7fff1fc0037e0000000000000000000000000000000000000000000000000000"));
+        Common.Key.Builder keyActive =
+                Common.Key.newBuilder();
+        keyActive.setAddress(client.parseAddress("4122ED62967ED0D2186B2FC639D7972D172A95C855"));
+        keyActive.setWeight(1);
+        builderActive.addKeys(keyActive);
+        activePermissions = builderActive.build();
+
+        builder.setOwner(ownerPermission);
+        builder.addActives(activePermissions);
+        builder.setOwnerAddress(client.parseAddress("4122ED62967ED0D2186B2FC639D7972D172A95C855"));
+
+        TransactionExtention transaction = client.accountPermissionUpdate(builder.build());
+        System.out.println(transaction);
+        Transaction signedTxn = client.signTransaction(transaction);
+        System.out.println(signedTxn.toString());
+        TransactionReturn ret = client.broadcastTransaction(signedTxn);
+        System.out.println("======== Result ========\n" + ret.toString());
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }
 ```
 
 ## Solidity Node APIs
