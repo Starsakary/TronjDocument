@@ -1498,7 +1498,7 @@ IllegalException, if fail to update account permission.
 ```java
 public void accountPermissionUpdate(){
         System.out.println("============= accountPermissionUpdate =============");
-        TronClient client = TronClient.ofNile("5bffa78c05e58d25e6d9fca69ece106678b5acdb558fd329972f0e860f27974f");
+        TronClient client = TronClient.ofNile("your privateKey");
         try {
 
         AccountPermissionUpdateContract.Builder builder =
@@ -1533,7 +1533,7 @@ public void accountPermissionUpdate(){
 
         builder.setOwner(ownerPermission);
         builder.addActives(activePermissions);
-        builder.setOwnerAddress(client.parseAddress("4122ED62967ED0D2186B2FC639D7972D172A95C855"));
+        builder.setOwnerAddress(client.parseAddress("ownerAddress"));
 
         TransactionExtention transaction = client.accountPermissionUpdate(builder.build());
         System.out.println(transaction);
