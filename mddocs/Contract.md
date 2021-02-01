@@ -80,6 +80,7 @@ It's easy to deploy your smart contract on the TRON network. A smart contract mu
      * @throws InvalidProtocolBufferException if the input is not valid JSON format or there are unknown fields in the input
      */
     public void deploySmartContract() {
+        TronClient c = TronClient.ofNile("private key"); 
         try {
             String bytecode = "608060405234801561001057600080fd5b50d380156" +
                            "1001d57600080fd5b50d2801561002a57600080fd5" +
