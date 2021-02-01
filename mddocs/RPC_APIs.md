@@ -1146,15 +1146,11 @@ Issue a token
 
 *12. precision(int)**    
 
-*13. fronzenAmount(long)*  
+*13. frozenSupply*  
 
-> fronzen amount.  
+> HashMap<frozenDay, frozenAmount>.   
 
-*14. frozenDay(long)*  
-
-> fronzen day.  
-
-*15. description(String)**  
+*14. description(String)**  
 
 > Token description, default hexString.     
 
@@ -1175,9 +1171,12 @@ public void createAssetIssue() {
         try {
             long start = System.currentTimeMillis() + 2000;
             long end = System.currentTimeMillis() + 1000000000;
-
+            HashMap<String, String> frozenSupply = new HashMap<String, String>();
+            frozenSupply.put("1","1");
+            frozenSupply.put("2","1");
+            frozenSupply.put("3","2");
             TransactionExtention transaction = client.createAssetIssue("owner address","lsp1", "saf1",100000000L, 1, 1000,start,end,"7777772e6578616d706c652e636f6d",
-                    100000L,1L,6,1L,1L,"stest-assetissue");
+                                100000L,1L,6,frozenSupply,"stest-assetissue");
             System.out.println(transaction);
             Transaction signedTxn = client.signTransaction(transaction);
             System.out.println(signedTxn.toString());
