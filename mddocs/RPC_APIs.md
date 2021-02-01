@@ -1146,11 +1146,11 @@ Issue a token
 
 *12. precision(int)**    
 
-*13. fronzenAmount(long)**  
+*13. fronzenAmount(long)*  
 
 > fronzen amount.  
 
-*14. frozenDay(long)**  
+*14. frozenDay(long)*  
 
 > fronzen day.  
 
