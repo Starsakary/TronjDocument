@@ -2,7 +2,7 @@
 
 Tronj is compiled by `jdk13.0.2+8`. 
 
-The latest version is **0.1.1**.
+The latest version is **0.1.2**.
 
 ## Installation
 
@@ -34,9 +34,9 @@ dependencies {
     // protobuf & grpc
     implementation 'com.google.protobuf:protobuf-java:3.11.0'
 
-    implementation 'org.tron.tronj:abi:0.1.1'
-    implementation 'org.tron.tronj:client:0.1.1'
-    implementation 'org.tron.tronj:utils:0.1.1'
+    implementation 'org.tron.tronj:abi:0.1.2'
+    implementation 'org.tron.tronj:client:0.1.2'
+    implementation 'org.tron.tronj:utils:0.1.2'
 
     implementation 'com.google.guava:guava:28.0-jre'
 }
@@ -46,13 +46,13 @@ dependencies {
 
 ### Maven Setting
 
-Use maven repo setting from Bintray. The latest version is **0.1.1**.
+Use maven repo setting from Bintray. The latest version is **0.1.2**.
 
 ```xml
 <dependency>
   <groupId>org.tron.tronj</groupId>
   <artifactId>abi</artifactId>
-  <version>0.1.1</version>
+  <version>0.1.2</version>
   <type>pom</type>
 </dependency>
 ```
@@ -91,7 +91,7 @@ From the [repository](https://dl.bintray.com/tronj/tronj/org/tron/tronj) downloa
 
 Run `gpg --keyserver keyserver.ubuntu.com --recv-key AD0876A4` to get the public key.
 
-Taking the abi package as an example, run `gpg --verify abi-0.1.1.jar.asc abi-0.1.1.jar` to verify the signature.
+Taking the abi package as an example, run `gpg --verify abi-0.1.2.jar.asc abi-0.1.2.jar` to verify the signature.
 
 Alternatively, you may import the public from below.
 
