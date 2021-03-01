@@ -1,6 +1,6 @@
 # Quickstart
 
-Tronj is compiled by `jdk13.0.2+8`. 
+Tronj is compiled by `jdk13.0.2+8`.  
 
 The latest version is **0.1.2**.
 
@@ -46,7 +46,7 @@ dependencies {
 
 ### Maven Setting
 
-Use maven repo setting from Bintray. The latest version is **0.1.2**.
+Use maven repo setting from Bintray.
 
 ```xml
 <dependency>
